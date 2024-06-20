@@ -1,3 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 .my-container {
   width: 80%;
   margin: 0px auto;
@@ -32,19 +39,19 @@
 .hero-section .hero-text p {
   font-size: 1.3rem;
   font-weight: 300;
-  color: #e3e3e3;
+  color: #f2f2f2;
   margin: 0px 0px 15px 5px;
 }
 .hero-section .hero-text hr {
   opacity: 80;
   width: 15%;
-  border: 1px solid #e3e3e3;
+  border: 1px solid #f2f2f2;
   margin-left: 5px;
 }
 .hero-section .hero-text .cta-tour {
   text-decoration: none;
   background-color: #342659;
-  color: #e3e3e3;
+  color: #f2f2f2;
   padding: 6px 12px;
   margin-top: 15px;
   border-radius: 30px;

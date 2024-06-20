@@ -1,3 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 .my-container {
   width: 80%;
   margin: 0px auto;
@@ -20,7 +27,7 @@
   left: 50%;
   transform: translate(-50%, 0);
   top: 30px;
-  background-color: #e3e3e3;
+  background-color: #f2f2f2;
   padding: 15px 40px;
   border-radius: 30px;
 }
@@ -47,7 +54,7 @@
 }
 .navigation nav ul li .active {
   background-color: #6f4fc2;
-  color: #e3e3e3;
+  color: #f2f2f2;
   padding: 4px 50px;
   border-radius: 30px;
 }

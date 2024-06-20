@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 const routes: Routes = [
   {
@@ -9,6 +11,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
       // {
       //   path: 'tracks',
       //   loadChildren: () =>
@@ -25,8 +29,7 @@ const routes: Routes = [
       // },
       // { path: 'contact-us', component: ContactUsComponent },
       // { path: 'author', component: AuthorComponent },
-      // { path: 'login', component: LoginComponent },
-      // { path: 'register', component: RegisterComponent },
+
       // {
       //   path: 'admin',
       //   component: AdminLayoutComponent,

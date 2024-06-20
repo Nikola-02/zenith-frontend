@@ -1,1 +1,50 @@
-<p>login works!</p>
+<div class="container p-5 login-container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <h1 class="text-center">Login</h1>
+    </div>
+    <div class="col-md-6">
+      <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            ngModel
+            name="email"
+            required
+            email
+          />
+          <div *ngIf="true" class="alert alert-danger mt-2">
+            Email is required. Format: example gmail.com
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            ngModel
+            required
+            name="password"
+          />
+          <div *ngIf="true" class="alert alert-danger mt-2">
+            Password is required.
+          </div>
+        </div>
+        <button type="submit" class="btn">Login</button>
+      </form>
+      <!-- <p *ngIf="serverLoginError" class="alert alert-danger">
+        {{ serverLoginError }}
+      </p>
+      <p *ngIf="message" class="alert alert-success">
+        {{ message }}
+      </p> -->
+    </div>
+  </div>
+</div>

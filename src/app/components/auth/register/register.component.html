@@ -1,1 +1,94 @@
-<p>register works!</p>
+<div class="container p-5 register-container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <h1 class="text-center">Register</h1>
+    </div>
+    <div class="col-md-6">
+      <form>
+        <div class="mb-3">
+          <label for="exampleInputUsername1" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputUsername1"
+            ngModel
+            name="username"
+            required
+          />
+          <div *ngIf="true" class="alert alert-danger mt-2">
+            Username is required
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputFirstName1" class="form-label"
+            >FirstName</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputfirstName1"
+            ngModel
+            name="firstName"
+            required
+          />
+          <div *ngIf="true" class="alert alert-danger mt-2">
+            First name is required
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputLastName1" class="form-label">LastName</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputLastName1"
+            ngModel
+            name="lastName"
+            required
+          />
+          <div *ngIf="true" class="alert alert-danger mt-2">
+            Last name is required
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            ngModel
+            name="email"
+            required
+            email
+          />
+          <div *ngIf="true" class="alert alert-danger mt-2">
+            Email is required. Format: email gmail.com
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            ngModel
+            required
+            name="password"
+          />
+          <div *ngIf="true" class="alert alert-danger mt-2">
+            Password is required.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+      <!-- <p *ngIf="serverRegisterError" class="alert alert-danger">
+        {{ serverRegisterError }}
+      </p>
+      <p *ngIf="message" class="alert alert-success">
+        {{ message }}
+      </p> -->
+    </div>
+  </div>
+</div>
