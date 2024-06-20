@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"footer.component.css"}
+{"version":3,"sources":["../../../shared/sass/_variables.scss","footer.component.css","footer.component.scss"],"names":[],"mappings":"AASA;EAJE,UAAA;EACA,gBAAA;ACHF;;ACDA;EACE,SAAA;EACA,UAAA;EACA,sBAAA;EACA,kCAAA;ADIF;;ACDA;EACE,yBFVY;EEWZ,kBAAA;EACA,kBAAA;EACA,cFXM;ACeR","file":"footer.component.css"}

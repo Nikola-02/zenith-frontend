@@ -1,1 +1,25 @@
-<p>nav works!</p>
+<div class="navigation">
+  <h1><a routerLink="/">Rhythm Realm</a></h1>
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/tracks">Tracks</a>
+      </li>
+      <div class="d-flex">
+        <!-- *ngIf="user$ | async as user; else showLoginRegister" -->
+        <div>
+          <!-- *ngIf="user.role.name == 'admin'" -->
+          <li><a class="active" routerLink="/admin/index">Admin Panel</a></li>
+        </div>
+        <div class="d-flex">
+          <li><a routerLink="/playlists">Playlists</a></li>
+        </div>
+        <li><a class="logout">Logout</a></li>
+      </div>
+      <ng-template #showLoginRegister>
+        <li><a routerLink="/user/register">Register</a></li>
+        <li><a routerLink="/user/login" class="active">Login</a></li>
+      </ng-template>
+    </ul>
+  </nav>
+</div>

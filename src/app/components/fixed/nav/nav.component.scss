@@ -1,0 +1,56 @@
+@use "../../../shared/sass/variables" as vars;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 30px;
+  background-color: #e3e3e3;
+  padding: 15px 40px;
+  border-radius: 30px;
+  h1 {
+    font-size: 2rem;
+    font-weight: 500;
+    a {
+      text-decoration: none;
+      color: vars.$darkPurple;
+    }
+  }
+  nav {
+    ul {
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+      li {
+        margin-left: 20px;
+        a {
+          font-size: 1.2rem;
+          text-decoration: none;
+          color: vars.$lightPurple;
+        }
+        .active {
+          background-color: #6f4fc2;
+          color: vars.$white;
+          padding: 4px 50px;
+          border-radius: 30px;
+        }
+      }
+    }
+  }
+}
+
+.logout {
+  cursor: pointer;
+}

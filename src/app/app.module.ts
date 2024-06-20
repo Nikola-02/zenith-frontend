@@ -7,6 +7,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { NavComponent } from './components/fixed/nav/nav.component';
 import { FooterComponent } from './components/fixed/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeComponent } from './components/home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

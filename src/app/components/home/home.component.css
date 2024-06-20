@@ -1,5 +1,5 @@
 .my-container {
-  width: 90%;
+  width: 80%;
   margin: 0px auto;
 }
 
@@ -13,7 +13,7 @@
 .hero-section {
   width: 100%;
   height: 100vh;
-  background-image: url("../../assets/images/hero.png");
+  background-image: url("../../../assets/images/hero.png");
   background-position: center;
   background-size: cover;
 }
@@ -42,6 +42,7 @@
   margin-left: 5px;
 }
 .hero-section .hero-text .cta-tour {
+  text-decoration: none;
   background-color: #342659;
   color: #e3e3e3;
   padding: 6px 12px;

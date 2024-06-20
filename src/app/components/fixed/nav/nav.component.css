@@ -1,1 +1,57 @@
-/*# sourceMappingURL=nav.component.css.map */
+.my-container {
+  width: 80%;
+  margin: 0px auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 30px;
+  background-color: #e3e3e3;
+  padding: 15px 40px;
+  border-radius: 30px;
+}
+.navigation h1 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.navigation h1 a {
+  text-decoration: none;
+  color: #342659;
+}
+.navigation nav ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+.navigation nav ul li {
+  margin-left: 20px;
+}
+.navigation nav ul li a {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #6f4fc2;
+}
+.navigation nav ul li .active {
+  background-color: #6f4fc2;
+  color: #e3e3e3;
+  padding: 4px 50px;
+  border-radius: 30px;
+}
+
+.logout {
+  cursor: pointer;
+}/*# sourceMappingURL=nav.component.css.map */
