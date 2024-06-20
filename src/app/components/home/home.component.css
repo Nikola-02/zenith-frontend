@@ -20,7 +20,7 @@
 .hero-section .hero-text {
   position: absolute;
   top: 50%;
-  right: 50%;
+  right: 45%;
   transform: translate(85%, -50%);
 }
 .hero-section .hero-text h2 {
@@ -65,6 +65,7 @@
 .about-us-section .about-us-content {
   display: flex;
   justify-content: center;
+  gap: 40px;
   align-items: center;
 }
 .about-us-section .about-us-content .about-us-image {
@@ -74,8 +75,9 @@
   width: 100%;
 }
 .about-us-section .about-us-content .about-us-text {
-  width: 25%;
+  width: 35%;
 }
 .about-us-section .about-us-content .about-us-text strong {
+  font-size: 21px;
   color: #6f4fc2;
 }/*# sourceMappingURL=home.component.css.map */

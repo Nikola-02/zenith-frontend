@@ -16,7 +16,7 @@
   .hero-text {
     position: absolute;
     top: 50%;
-    right: 50%;
+    right: 45%;
     transform: translate(85%, -50%);
     h2 {
       font-size: 3.3rem;
@@ -50,8 +50,7 @@
 
 .about-us-section {
   padding: 60px 0px;
-  width: 80%;
-  margin: 0px auto;
+  @include vars.wrapper();
   .about-us-title {
     margin-bottom: 40px;
     h2 {
@@ -62,6 +61,7 @@
   .about-us-content {
     display: flex;
     justify-content: center;
+    gap: 40px;
     align-items: center;
     .about-us-image {
       width: 25%;
@@ -71,8 +71,9 @@
     }
 
     .about-us-text {
-      width: 25%;
+      width: 35%;
       strong {
+        font-size: 21px;
         color: vars.$lightPurple;
       }
     }
