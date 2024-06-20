@@ -19,7 +19,7 @@
           <div
             *ngIf="
               form.get('username')?.hasError('required') ||
-              form.get('username')?.hasError('min')
+              form.get('username')?.hasError('minLength')
             "
             class="alert alert-danger mt-2"
           >
@@ -35,11 +35,15 @@
             class="form-control"
             id="exampleInputfirstName1"
             name="firstName"
+            formControlName="firstName"
             required
             placeholder="Ime"
           />
-          <div *ngIf="true" class="alert alert-danger mt-2">
-            First name is required
+          <div
+            *ngIf="form.get('firstName')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            First name is required.
           </div>
         </div>
         <div class="mb-3">
@@ -48,12 +52,16 @@
             type="text"
             class="form-control"
             id="exampleInputLastName1"
+            formControlName="lastName"
             name="lastName"
             required
             placeholder="Prezime"
           />
-          <div *ngIf="true" class="alert alert-danger mt-2">
-            Last name is required
+          <div
+            *ngIf="form.get('lastName')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Last name is required.
           </div>
         </div>
         <div class="mb-3">
@@ -65,13 +73,20 @@
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            formControlName="email"
             name="email"
             required
             email
             placeholder="email@gmail.com"
           />
-          <div *ngIf="true" class="alert alert-danger mt-2">
-            Email is required. Format: email gmail.com
+          <div
+            *ngIf="
+              form.get('email')?.hasError('required') ||
+              form.get('email')?.hasError('email')
+            "
+            class="alert alert-danger mt-2"
+          >
+            Email is required. Format: example gmail.com.
           </div>
         </div>
         <div class="mb-3">
@@ -79,20 +94,38 @@
           <input
             type="password"
             class="form-control"
+            formControlName="password"
             id="exampleInputPassword1"
             required
             name="password"
           />
-          <div *ngIf="true" class="alert alert-danger mt-2">
-            Password is required.
+          <div
+            *ngIf="
+              form.get('password')?.hasError('required') ||
+              form.get('password')?.hasError('invalidPassword')
+            "
+            class="alert alert-danger mt-2"
+          >
+            <p class="p-0 m-0">Password is required.</p>
+            <p class="m-0 mt-2">
+              Password format: 8 characters, 1 uppercase letter, 1 lowercase
+              letter and 1 number
+            </p>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="form.invalid"
+          (click)="register()"
+        >
+          Register
+        </button>
       </form>
-      <!-- <p *ngIf="serverRegisterError" class="alert alert-danger">
-        {{ serverRegisterError }}
+      <p *ngIf="serverError" class="alert alert-danger">
+        {{ serverError }}
       </p>
-      <p *ngIf="message" class="alert alert-success">
+      <!-- <p *ngIf="message" class="alert alert-success">
         {{ message }}
       </p> -->
     </div>

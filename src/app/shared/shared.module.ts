@@ -42,6 +42,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -83,6 +84,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSortModule,
     MatTableModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   exports: [
     MatAutocompleteModule,
@@ -121,6 +123,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSortModule,
     MatTableModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
 })
 export class SharedModule {}
