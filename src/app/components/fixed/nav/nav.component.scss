@@ -13,7 +13,7 @@
   justify-content: space-between;
   width: 80%;
   position: fixed;
-  z-index: 9999;
+  z-index: 1000;
   left: 50%;
   transform: translate(-50%, 0);
   top: 30px;
@@ -60,4 +60,28 @@
 
 .logout {
   cursor: pointer;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+}
+
+.icons {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.span-text {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.mat-mdc-menu-content,
+.mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
+  font-size: 16px;
+}
+
+.profile {
+  margin-left: 20px;
 }

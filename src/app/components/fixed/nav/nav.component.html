@@ -7,17 +7,42 @@
       <li>
         <a routerLink="/tracks">Tracks</a>
       </li>
-      <div *ngIf="false; else showLoginRegister" class="d-flex">
+      <div
+        *ngIf="true; else showLoginRegister"
+        class="d-flex align-items-center"
+      >
         <!-- *ngIf="user$ | async as user; " -->
 
         <div class="d-flex">
           <li><a routerLink="/playlists">Playlists</a></li>
         </div>
-        <div *ngIf="true">
-          <!-- *ngIf="user.role.name == 'admin'" -->
-          <li><a class="active" routerLink="/admin">Admin Panel</a></li>
+        <div class="profile">
+          <button mat-button [matMenuTriggerFor]="menu" class="btn m-0 p-0">
+            <img
+              src="/assets/images/profile-image.png"
+              alt="Default profile picture"
+              class="profile-img"
+            />
+          </button>
+          <mat-menu #menu="matMenu" class="above">
+            <button mat-menu-item>
+              <i class="fa-solid fa-user icons"></i>
+              <span class="mx-4 span-text">Neko</span>
+            </button>
+            <button mat-menu-item>
+              <i class="fa-regular fa-address-book icons"></i>
+              <span class="mx-4 span-text">Role</span>
+            </button>
+            <a routerLink="/admin" mat-menu-item *ngIf="'admin' == 'admin'">
+              <i class="fa-solid fa-lock icons"></i>
+              <span class="mx-4 w-100 active span-text">Admin panel</span>
+            </a>
+            <a mat-menu-item (click)="logout()">
+              <i class="fa-solid fa-right-from-bracket icons"></i
+              ><span class="mx-4 span-text">Logout</span>
+            </a>
+          </mat-menu>
         </div>
-        <li><a class="logout">Logout</a></li>
       </div>
       <ng-template #showLoginRegister>
         <div class="login-reg">
