@@ -9,18 +9,21 @@
       </li>
       <div *ngIf="false; else showLoginRegister" class="d-flex">
         <!-- *ngIf="user$ | async as user; " -->
-        <div>
-          <!-- *ngIf="user.role.name == 'admin'" -->
-          <li><a class="active" routerLink="/admin/index">Admin Panel</a></li>
-        </div>
+
         <div class="d-flex">
           <li><a routerLink="/playlists">Playlists</a></li>
+        </div>
+        <div *ngIf="true">
+          <!-- *ngIf="user.role.name == 'admin'" -->
+          <li><a class="active" routerLink="/admin">Admin Panel</a></li>
         </div>
         <li><a class="logout">Logout</a></li>
       </div>
       <ng-template #showLoginRegister>
-        <li><a routerLink="/register">Register</a></li>
-        <li><a routerLink="/login" class="active">Login</a></li>
+        <div class="login-reg">
+          <li><a routerLink="/login" class="active">Login</a></li>
+          <li><a routerLink="/register">Register</a></li>
+        </div>
       </ng-template>
     </ul>
   </nav>

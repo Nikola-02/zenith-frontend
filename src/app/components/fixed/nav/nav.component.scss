@@ -43,11 +43,18 @@
         .active {
           background-color: #6f4fc2;
           color: vars.$white;
-          padding: 4px 50px;
+          padding: 8px 37px;
           border-radius: 30px;
         }
       }
     }
+  }
+
+  .login-reg {
+    display: flex;
+    margin-left: 30px;
+    padding-left: 10px;
+    border-left: 1px solid rgba($color: #000000, $alpha: 0.2);
   }
 }
 

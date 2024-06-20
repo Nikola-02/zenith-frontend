@@ -27,7 +27,7 @@
   left: 50%;
   transform: translate(-50%, 0);
   top: 30px;
-  background-color: #f2f2f2;
+  background-color: #f7f7f7;
   padding: 15px 40px;
   border-radius: 30px;
 }
@@ -54,9 +54,15 @@
 }
 .navigation nav ul li .active {
   background-color: #6f4fc2;
-  color: #f2f2f2;
-  padding: 4px 50px;
+  color: #f7f7f7;
+  padding: 8px 37px;
   border-radius: 30px;
+}
+.navigation .login-reg {
+  display: flex;
+  margin-left: 30px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .logout {
