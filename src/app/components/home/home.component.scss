@@ -1,0 +1,79 @@
+@use "../../shared/sass/variables" as vars;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../assets/images/hero.png");
+  background-position: center;
+  background-size: cover;
+  .hero-text {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(85%, -50%);
+    h2 {
+      font-size: 3.3rem;
+      font-weight: 700;
+      color: vars.$darkPurple;
+      margin: 0;
+    }
+    p {
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: vars.$white;
+      margin: 0px 0px 15px 5px;
+    }
+    hr {
+      opacity: 80;
+      width: 15%;
+      border: 1px solid vars.$white;
+      margin-left: 5px;
+    }
+
+    .cta-tour {
+      background-color: vars.$darkPurple;
+      color: vars.$white;
+      padding: 6px 12px;
+      margin-top: 15px;
+      border-radius: 30px;
+    }
+  }
+}
+
+.about-us-section {
+  padding: 60px 0px;
+  width: 80%;
+  margin: 0px auto;
+  .about-us-title {
+    margin-bottom: 40px;
+    h2 {
+      font-size: 2.2rem;
+      text-align: center;
+    }
+  }
+  .about-us-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .about-us-image {
+      width: 25%;
+      img {
+        width: 100%;
+      }
+    }
+
+    .about-us-text {
+      width: 25%;
+      strong {
+        color: vars.$lightPurple;
+      }
+    }
+  }
+}

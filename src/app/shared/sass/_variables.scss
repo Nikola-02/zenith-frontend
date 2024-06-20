@@ -1,0 +1,12 @@
+$lightPurple: #6f4fc2;
+$darkPurple: #342659;
+$white: #e3e3e3;
+
+@mixin wrapper {
+  width: 90%;
+  margin: 0px auto;
+}
+
+.my-container {
+  @include wrapper();
+}

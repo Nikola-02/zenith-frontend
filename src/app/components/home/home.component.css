@@ -1,0 +1,80 @@
+.my-container {
+  width: 90%;
+  margin: 0px auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../assets/images/hero.png");
+  background-position: center;
+  background-size: cover;
+}
+.hero-section .hero-text {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(85%, -50%);
+}
+.hero-section .hero-text h2 {
+  font-size: 3.3rem;
+  font-weight: 700;
+  color: #342659;
+  margin: 0;
+}
+.hero-section .hero-text p {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: #e3e3e3;
+  margin: 0px 0px 15px 5px;
+}
+.hero-section .hero-text hr {
+  opacity: 80;
+  width: 15%;
+  border: 1px solid #e3e3e3;
+  margin-left: 5px;
+}
+.hero-section .hero-text .cta-tour {
+  background-color: #342659;
+  color: #e3e3e3;
+  padding: 6px 12px;
+  margin-top: 15px;
+  border-radius: 30px;
+}
+
+.about-us-section {
+  padding: 60px 0px;
+  width: 80%;
+  margin: 0px auto;
+}
+.about-us-section .about-us-title {
+  margin-bottom: 40px;
+}
+.about-us-section .about-us-title h2 {
+  font-size: 2.2rem;
+  text-align: center;
+}
+.about-us-section .about-us-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about-us-section .about-us-content .about-us-image {
+  width: 25%;
+}
+.about-us-section .about-us-content .about-us-image img {
+  width: 100%;
+}
+.about-us-section .about-us-content .about-us-text {
+  width: 25%;
+}
+.about-us-section .about-us-content .about-us-text strong {
+  color: #6f4fc2;
+}/*# sourceMappingURL=home.component.css.map */
