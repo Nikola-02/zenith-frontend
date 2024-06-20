@@ -4,19 +4,26 @@
       <h1 class="text-center">Register</h1>
     </div>
     <div class="col-md-6">
-      <form>
+      <form [formGroup]="form">
         <div class="mb-3">
           <label for="exampleInputUsername1" class="form-label">Username</label>
           <input
             type="text"
             class="form-control"
             id="exampleInputUsername1"
-            ngModel
+            formControlName="username"
             name="username"
+            placeholder="korisnik123"
             required
           />
-          <div *ngIf="true" class="alert alert-danger mt-2">
-            Username is required
+          <div
+            *ngIf="
+              form.get('username')?.hasError('required') ||
+              form.get('username')?.hasError('min')
+            "
+            class="alert alert-danger mt-2"
+          >
+            Username is required and min length is 3.
           </div>
         </div>
         <div class="mb-3">
@@ -27,9 +34,9 @@
             type="text"
             class="form-control"
             id="exampleInputfirstName1"
-            ngModel
             name="firstName"
             required
+            placeholder="Ime"
           />
           <div *ngIf="true" class="alert alert-danger mt-2">
             First name is required
@@ -41,9 +48,9 @@
             type="text"
             class="form-control"
             id="exampleInputLastName1"
-            ngModel
             name="lastName"
             required
+            placeholder="Prezime"
           />
           <div *ngIf="true" class="alert alert-danger mt-2">
             Last name is required
@@ -58,10 +65,10 @@
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            ngModel
             name="email"
             required
             email
+            placeholder="email@gmail.com"
           />
           <div *ngIf="true" class="alert alert-danger mt-2">
             Email is required. Format: email gmail.com
@@ -73,7 +80,6 @@
             type="password"
             class="form-control"
             id="exampleInputPassword1"
-            ngModel
             required
             name="password"
           />
