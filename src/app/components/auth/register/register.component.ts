@@ -10,6 +10,7 @@ import {
 import { AuthService } from '../auth.service';
 import { IRegisterUser } from '../../../shared/interfaces/i-register-user';
 import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class RegisterComponent implements OnDestroy {
   registerSub: Subscription;
-  serverError = '';
+  validationErrors: { error: string }[] = [];
+  serverError: string = '';
 
   form = new FormGroup({
     username: new FormControl('', [
@@ -34,7 +36,7 @@ export class RegisterComponent implements OnDestroy {
     ]),
   });
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   register() {
     if (this.form.valid) {
@@ -42,10 +44,24 @@ export class RegisterComponent implements OnDestroy {
 
       this.registerSub = this.authService.register(registerValues).subscribe({
         next: (response) => {
-          console.log(response);
+          this.validationErrors = [];
+          this.serverError = '';
+
+          this.router.navigate(['/login']);
         },
         error: (error) => {
-          console.log(error.message);
+          console.log(error);
+          if (error.status == 422) {
+            this.validationErrors = error.error;
+            return;
+          }
+
+          if (error.status == 500) {
+            this.serverError = 'Error occurred in database.';
+            return;
+          }
+
+          this.serverError = 'Error occurred.';
         },
       });
     }

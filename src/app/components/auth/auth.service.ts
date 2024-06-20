@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { IRegisterUser } from '../../shared/interfaces/i-register-user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environment';
+import { ILoginUser } from '../../shared/interfaces/i-login-user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private apiUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) {}
 
   register(formValues: IRegisterUser) {
-    let registerUrl = environment.apiUrl + 'users';
+    return this.http.post(`${this.apiUrl}users`, formValues);
+  }
 
-    return this.http.post(registerUrl, formValues);
+  login(formValues: ILoginUser) {
+    return this.http.post(`${this.apiUrl}auth`, formValues);
   }
 }

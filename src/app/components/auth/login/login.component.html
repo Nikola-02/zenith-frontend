@@ -4,7 +4,7 @@
       <h1 class="text-center">Login</h1>
     </div>
     <div class="col-md-6">
-      <form>
+      <form [formGroup]="form">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
@@ -14,13 +14,19 @@
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            ngModel
+            formControlName="email"
             name="email"
             required
             email
           />
-          <div *ngIf="true" class="alert alert-danger mt-2">
-            Email is required. Format: example gmail.com
+          <div
+            *ngIf="
+              form.get('email')?.hasError('required') ||
+              form.get('email')?.hasError('email')
+            "
+            class="alert alert-danger mt-2"
+          >
+            Email is required. Format: example gmail.com.
           </div>
         </div>
         <div class="mb-3">
@@ -29,20 +35,40 @@
             type="password"
             class="form-control"
             id="exampleInputPassword1"
-            ngModel
+            formControlName="password"
             required
             name="password"
           />
-          <div *ngIf="true" class="alert alert-danger mt-2">
-            Password is required.
+          <div
+            *ngIf="
+              form.get('password')?.hasError('required') ||
+              form.get('password')?.hasError('invalidPassword')
+            "
+            class="alert alert-danger mt-2"
+          >
+            <p class="p-0 m-0">Password is required.</p>
+            <p class="m-0 mt-2">
+              Password format: 8 characters, 1 uppercase letter, 1 lowercase
+              letter and 1 number
+            </p>
           </div>
         </div>
-        <button type="submit" class="btn">Login</button>
+        <button
+          type="submit"
+          class="btn"
+          [disabled]="form.invalid"
+          (click)="login()"
+        >
+          Login
+        </button>
+        <p class="mt-3">
+          Don't have an account? <a routerLink="/register">Register here</a>
+        </p>
       </form>
-      <!-- <p *ngIf="serverLoginError" class="alert alert-danger">
-        {{ serverLoginError }}
+      <p *ngIf="wrongCredentials" class="alert alert-danger">
+        Wrong credentials.
       </p>
-      <p *ngIf="message" class="alert alert-success">
+      <!-- <p *ngIf="message" class="alert alert-success">
         {{ message }}
       </p> -->
     </div>
