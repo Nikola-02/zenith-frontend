@@ -1,6 +1,6 @@
 <div class="navigation">
   <h1>
-    <a routerLink="/">Rhythm Realm</a>
+    <a routerLink="/">Zenith</a>
   </h1>
   <nav>
     <ul>
@@ -9,7 +9,7 @@
       </li>
       <div
         *ngIf="true; else showLoginRegister"
-        class="d-flex align-items-center"
+        class="d-flex align-items-center playlist-others"
       >
         <!-- *ngIf="user$ | async as user; " -->
 
@@ -34,7 +34,7 @@
               <span class="mx-4 span-text">Role</span>
             </button>
             <a routerLink="/admin" mat-menu-item *ngIf="'admin' == 'admin'">
-              <i class="fa-solid fa-lock icons"></i>
+              <i class="fa-solid fa-chart-line icons"></i>
               <span class="mx-4 w-100 active span-text">Admin panel</span>
             </a>
             <a mat-menu-item (click)="logout()">

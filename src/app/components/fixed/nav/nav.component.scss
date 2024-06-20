@@ -38,7 +38,7 @@
         a {
           font-size: 1.2rem;
           text-decoration: none;
-          color: vars.$lightPurple;
+          color: vars.$darkPurple;
         }
         .active {
           background-color: #6f4fc2;
@@ -69,12 +69,12 @@
 
 .icons {
   margin-left: 10px;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .span-text {
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .mat-mdc-menu-content,
@@ -83,5 +83,9 @@
 }
 
 .profile {
+  margin-left: 50px;
+}
+
+.playlist-others {
   margin-left: 20px;
 }
