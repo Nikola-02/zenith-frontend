@@ -37,7 +37,8 @@ export class TracksComponent implements OnInit {
   }
 
   onOpen() {
-    //this.filterDiv.nativeElement.classList.toggle('active');
-    this.popUpService.show('Error occured.', 'error-snack-bar');
+    this.filterDiv.nativeElement.classList.toggle('active');
+
+    //this.popUpService.show('Error occured.', 'success-snack-bar');
   }
 }
