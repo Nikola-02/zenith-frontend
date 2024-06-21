@@ -8,7 +8,7 @@
         <a routerLink="/tracks">Tracks</a>
       </li>
       <div
-        *ngIf="false; else showLoginRegister"
+        *ngIf="user; else showLoginRegister"
         class="d-flex align-items-center playlist-others"
       >
         <!-- *ngIf="user$ | async as user; " -->
@@ -27,13 +27,9 @@
           <mat-menu #menu="matMenu" class="above">
             <button mat-menu-item>
               <i class="fa-solid fa-user icons"></i>
-              <span class="mx-4 span-text">Neko</span>
+              <span class="mx-4 span-text">{{ user.Username }}</span>
             </button>
-            <button mat-menu-item>
-              <i class="fa-regular fa-address-book icons"></i>
-              <span class="mx-4 span-text">Role</span>
-            </button>
-            <a routerLink="/admin" mat-menu-item *ngIf="'admin' == 'admin'">
+            <a routerLink="/admin" mat-menu-item *ngIf="isAdmin()">
               <i class="fa-solid fa-chart-line icons"></i>
               <span class="mx-4 w-100 active span-text">Admin panel</span>
             </a>

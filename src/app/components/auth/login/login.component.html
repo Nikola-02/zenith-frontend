@@ -68,6 +68,8 @@
       <p *ngIf="wrongCredentials" class="alert alert-danger">
         Wrong credentials.
       </p>
+      <p *ngIf="serverError" class="alert alert-danger">Error occurred.</p>
+      <p *ngIf="tokenExpired" class="alert alert-danger">{{ tokenExpired }}</p>
       <!-- <p *ngIf="message" class="alert alert-success">
         {{ message }}
       </p> -->

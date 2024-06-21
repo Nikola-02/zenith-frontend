@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -18,12 +18,11 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
   loginSub: Subscription;
   wrongCredentials: boolean = false;
   serverError: string = '';
-
-  constructor(private authService: AuthService, private router: Router) {}
+  tokenExpired: string = '';
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -32,6 +31,14 @@ export class LoginComponent implements OnDestroy {
       this.passwordValidator(),
     ]),
   });
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.authService.$tokenExpired.subscribe((message) => {
+      this.tokenExpired = message;
+    });
+  }
 
   login() {
     if (this.form.valid) {
@@ -45,7 +52,9 @@ export class LoginComponent implements OnDestroy {
           let tokenResponse: IUserToken = response as IUserToken;
           let token = tokenResponse.token;
 
-          // this.validationErrors = [];
+          localStorage.setItem('user_token', token);
+
+          this.authService.notifyForLoggedUser();
 
           this.router.navigate(['/']);
         },

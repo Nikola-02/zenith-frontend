@@ -12,7 +12,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { LoginComponent } from './components/auth/login/login.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { SharedModule } from './shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,23 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     LoginComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, SharedModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    SharedModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('user_token'),
+        allowedDomains: ['example.com'], // Dodajte domene na kojima želite da šaljete zahteve
+      },
+    }),
+  ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function tokenGetter() {
+  return localStorage.getItem('user_token');
+}
