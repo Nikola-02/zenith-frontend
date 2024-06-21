@@ -22,13 +22,13 @@ const routes: Routes = [
         component: RegisterComponent,
         canActivate: [unauthorizedGuard],
       },
-      // {
-      //   path: 'tracks',
-      //   loadChildren: () =>
-      //     import('./components/tracks/tracks.module').then(
-      //       (m) => m.RecipesModule
-      //     ),
-      // },
+      {
+        path: 'tracks',
+        loadChildren: () =>
+          import('./components/tracks/tracks.module').then(
+            (m) => m.TracksModule
+          ),
+      },
       // {
       //   path: 'shopping-list',
       //   loadChildren: () =>
