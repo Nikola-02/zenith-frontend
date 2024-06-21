@@ -1,0 +1,95 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.my-container {
+  width: 80%;
+  margin: 0px auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.tracks-section {
+  width: 80%;
+  margin: 0px auto;
+  margin-top: 130px;
+}
+.tracks-section .tracks-title h1 {
+  font-size: 2.3rem;
+}
+.tracks-section .tracks-search-sort {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.tracks-section .tracks-search-sort .search-div {
+  width: 30%;
+}
+.tracks-section .tracks-search-sort .search-div input {
+  padding: 5px;
+}
+.tracks-section .tracks-search-sort .sort-div {
+  width: 15%;
+}
+.tracks-section .tracks-search-sort .sort-div select {
+  padding: 5px;
+}
+.tracks-section .tracks {
+  margin-top: 70px;
+  display: grid;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.side-filter {
+  color: #f7f7f7;
+  position: fixed;
+  top: 50%;
+  transform: translate(0%, -45%);
+  left: -150px; /* Promenjena širina div-a */
+  width: 200px; /* Promenjena širina div-a */
+  height: 80vh; /* Visina celog browsera */
+  background-color: #6f4fc2;
+  transition: left 0.3s ease;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: -10px 0 20px rgba(0, 0, 0, 0.2); /* Drop shadow sa leve strane */
+}
+.side-filter .group {
+  margin-bottom: 20px;
+}
+.side-filter .subtitle {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.side-filter label {
+  display: block;
+  margin-bottom: 5px;
+}
+.side-filter input[type=checkbox] {
+  margin-right: 5px;
+}
+.side-filter .open {
+  display: flex;
+  justify-content: flex-end;
+}
+.side-filter .open button {
+  font-size: 30px;
+  color: #f7f7f7;
+}
+
+.side-filter.active {
+  left: 0;
+}/*# sourceMappingURL=tracks.component.css.map */

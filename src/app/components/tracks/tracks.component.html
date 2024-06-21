@@ -1,1 +1,58 @@
-<p>tracks works!</p>
+<div class="tracks-section">
+  <div class="tracks-title">
+    <h1 class="text-center">Tracks</h1>
+  </div>
+  <div class="tracks-search-sort">
+    <div class="search-div">
+      <p class="mb-2">Search:</p>
+      <input
+        class="form-control"
+        type="search"
+        id="search"
+        placeholder="Type..."
+      />
+      <!-- [(ngModel)]="search"
+        (ngModelChange)="fetchTracks()" -->
+    </div>
+
+    <div class="sort-div">
+      <p class="mb-2">Sort by:</p>
+      <select id="sortDdl" class="form-select" [selectedIndex]="0">
+        <!-- (change)="fetchTracks()"
+        [(ngModel)]="sort" -->
+        <option value="price-asc">Price ascending</option>
+        <option value="price-desc">Price descending</option>
+        <option value="name-asc">Name ascending</option>
+        <option value="name-desc">Name descending</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- <div class="tracks" *ngIf="tracks.length; else noTracks">
+    <app-track *ngFor="let track of tracks" [track]="track"></app-track>
+  </div> -->
+
+  <ng-template #noTracks>
+    <p class="alert alert-danger p-3 my-5">There is no tracks.</p>
+  </ng-template>
+</div>
+<div class="side-filter" #filter_div>
+  <h4 class="header mb-4">Filters</h4>
+  <div class="content">
+    <!-- <div class="group" *ngFor="let key of filtersKeys">
+      <div class="subtitle">{{ key }}</div>
+      <div *ngFor="let filter of filters[key]" #checkboxDiv>
+        <input
+          type="checkbox"
+          (change)="onFilter()"
+          class="{{ key }} chs"
+          value="{{ filter.id }}"
+        />
+        <label class="d-inline">{{ filter.name }}</label>
+      </div>
+    </div> -->
+  </div>
+  <div class="open">
+    <button class="btn" (click)="onOpen()">></button>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+@use "../../shared/sass/variables" as vars;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.tracks-section {
+  width: 80%;
+  margin: 0px auto;
+  margin-top: 130px;
+  .tracks-title {
+    h1 {
+      font-size: 2.3rem;
+    }
+  }
+
+  .tracks-search-sort {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    .search-div {
+      width: 30%;
+      input {
+        padding: 5px;
+      }
+    }
+    .sort-div {
+      width: 15%;
+      select {
+        padding: 5px;
+      }
+    }
+  }
+
+  .tracks {
+    margin-top: 70px;
+    display: grid;
+    column-gap: 40px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.side-filter {
+  color: vars.$white;
+  position: fixed;
+  top: 50%;
+  transform: translate(0%, -45%);
+  left: -150px; /* Promenjena širina div-a */
+  width: 200px; /* Promenjena širina div-a */
+  height: 80vh; /* Visina celog browsera */
+  background-color: vars.$lightPurple;
+  transition: left 0.3s ease;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: -10px 0 20px rgba(0, 0, 0, 0.2); /* Drop shadow sa leve strane */
+
+  .group {
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+
+  .open {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      font-size: 30px;
+      color: vars.$white;
+    }
+  }
+}
+
+.side-filter.active {
+  left: 0;
+}
