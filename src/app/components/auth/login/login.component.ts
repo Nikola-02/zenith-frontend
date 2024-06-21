@@ -12,6 +12,7 @@ import { AuthService } from '../auth.service';
 import { ILoginUser } from '../../../shared/interfaces/i-login-user';
 import { IUserToken } from '../../../shared/interfaces/i-user-token';
 import { Router } from '@angular/router';
+import { PopUpService } from '../../../shared/services/pop-up.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,6 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit, OnDestroy {
   loginSub: Subscription;
   wrongCredentials: boolean = false;
-  serverError: string = '';
   tokenExpired: string = '';
 
   form = new FormGroup({
@@ -32,7 +32,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     ]),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private popUpService: PopUpService
+  ) {}
 
   ngOnInit(): void {
     this.authService.$tokenExpired.subscribe((message) => {
@@ -47,7 +51,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.loginSub = this.authService.login(loginValues).subscribe({
         next: (response) => {
           this.wrongCredentials = false;
-          this.serverError = '';
 
           let tokenResponse: IUserToken = response as IUserToken;
           let token = tokenResponse.token;
@@ -66,11 +69,11 @@ export class LoginComponent implements OnInit, OnDestroy {
           }
 
           if (error.status == 500) {
-            this.serverError = 'Error occurred in database.';
+            this.popUpService.show('Error occurred.', 'error-snack-bar');
             return;
           }
 
-          this.serverError = 'Error occurred.';
+          this.popUpService.show('Error occurred.', 'error-snack-bar');
         },
       });
     }

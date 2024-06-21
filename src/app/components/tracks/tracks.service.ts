@@ -15,4 +15,8 @@ export class TracksService {
   fetchTracks(search: string) {
     return this.http.get(`${this.apiUrl}tracks`, noAuthOptions);
   }
+
+  fetchSingleTrack(id) {
+    return this.http.get(`${this.apiUrl}tracks/` + id, noAuthOptions);
+  }
 }

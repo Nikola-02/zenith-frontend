@@ -45,7 +45,7 @@
   align-items: center;
 }
 .navigation nav ul li {
-  margin-left: 20px;
+  margin-left: 50px;
 }
 .navigation nav ul li a {
   font-size: 1.2rem;
@@ -91,8 +91,4 @@
 
 .profile {
   margin-left: 50px;
-}
-
-.playlist-others {
-  margin-left: 20px;
 }/*# sourceMappingURL=nav.component.css.map */

@@ -3,6 +3,7 @@ import { AuthService } from '../../auth/auth.service';
 import { IUser } from '../../../shared/interfaces/i-user';
 import { Router } from '@angular/router';
 import { logoutIfTokenExpired } from '../../../app.module';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -12,11 +13,12 @@ import { logoutIfTokenExpired } from '../../../app.module';
 export class NavComponent implements OnInit {
   public user: IUser;
   private adminUseCaseId: number = 39;
+  private userSub: Subscription;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.$userSubject.subscribe((user) => {
+    this.userSub = this.authService.$userSubject.subscribe((user) => {
       console.log(user);
 
       if (user) {
@@ -45,5 +47,11 @@ export class NavComponent implements OnInit {
     this.authService.notifyTokenExpired();
 
     this.router.navigate(['/login']);
+  }
+
+  ngOnDestroy() {
+    if (this.userSub) {
+      this.userSub.unsubscribe();
+    }
   }
 }

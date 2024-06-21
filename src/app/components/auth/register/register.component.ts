@@ -11,6 +11,7 @@ import { AuthService } from '../auth.service';
 import { IRegisterUser } from '../../../shared/interfaces/i-register-user';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { PopUpService } from '../../../shared/services/pop-up.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,6 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnDestroy {
   registerSub: Subscription;
   validationErrors: { error: string }[] = [];
-  serverError: string = '';
 
   form = new FormGroup({
     username: new FormControl('', [
@@ -36,7 +36,11 @@ export class RegisterComponent implements OnDestroy {
     ]),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private popUpService: PopUpService
+  ) {}
 
   register() {
     if (this.form.valid) {
@@ -45,7 +49,6 @@ export class RegisterComponent implements OnDestroy {
       this.registerSub = this.authService.register(registerValues).subscribe({
         next: (response) => {
           this.validationErrors = [];
-          this.serverError = '';
 
           this.router.navigate(['/login']);
         },
@@ -57,11 +60,11 @@ export class RegisterComponent implements OnDestroy {
           }
 
           if (error.status == 500) {
-            this.serverError = 'Error occurred in database.';
+            this.popUpService.show('Error occurred.', 'error-snack-bar');
             return;
           }
 
-          this.serverError = 'Error occurred.';
+          this.popUpService.show('Error occurred.', 'error-snack-bar');
         },
       });
     }

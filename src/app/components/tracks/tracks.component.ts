@@ -1,18 +1,26 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { TracksService } from './tracks.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpService } from '../../shared/services/pop-up.service';
 import { ITrack } from '../../shared/interfaces/i-track';
 import { IGetResponse } from '../../shared/interfaces/i-get-response';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tracks',
   templateUrl: './tracks.component.html',
   styleUrl: './tracks.component.scss',
 })
-export class TracksComponent implements OnInit {
+export class TracksComponent implements OnInit, OnDestroy {
   public tracks: ITrack[] = [];
   public search: string = '';
+  public tracksSub: Subscription;
   @ViewChild('filter_div') filterDiv!: ElementRef;
 
   constructor(
@@ -25,7 +33,7 @@ export class TracksComponent implements OnInit {
   }
 
   fetchTracks() {
-    this.tracksService.fetchTracks(this.search).subscribe({
+    this.tracksSub = this.tracksService.fetchTracks(this.search).subscribe({
       next: (response) => {
         let responseObj: IGetResponse = response as IGetResponse;
 
@@ -48,5 +56,11 @@ export class TracksComponent implements OnInit {
     this.filterDiv.nativeElement.classList.toggle('active');
 
     //this.popUpService.show('Error occured.', 'success-snack-bar');
+  }
+
+  ngOnDestroy(): void {
+    if (this.tracksSub) {
+      this.tracksSub.unsubscribe();
+    }
   }
 }
