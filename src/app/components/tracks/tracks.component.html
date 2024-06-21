@@ -9,10 +9,10 @@
         class="form-control"
         type="search"
         id="search"
+        [(ngModel)]="search"
+        (ngModelChange)="fetchTracks()"
         placeholder="Type..."
       />
-      <!-- [(ngModel)]="search"
-        (ngModelChange)="fetchTracks()" -->
     </div>
 
     <div class="sort-div">
@@ -28,9 +28,9 @@
     </div>
   </div>
 
-  <!-- <div class="tracks" *ngIf="tracks.length; else noTracks">
+  <div class="tracks" *ngIf="tracks.length; else noTracks">
     <app-track *ngFor="let track of tracks" [track]="track"></app-track>
-  </div> -->
+  </div>
 
   <ng-template #noTracks>
     <p class="alert alert-danger p-3 my-5">There is no tracks.</p>

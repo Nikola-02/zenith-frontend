@@ -3,26 +3,34 @@
     <!-- Product image-->
     <img
       class="card-img-top"
-      src="http://localhost:5001/wwwroot/tracks/images/00203184-c224-4139-b112-7f7b5a96e37a.jpg"
-      alt="..."
+      [src]="'http://localhost:5001/tracks/images/' + track.image"
+      alt="{{ track.name }}"
     />
     <!-- Product details-->
     <div class="card-body p-4">
       <div class="text-center">
         <!-- Product name-->
-        <h5 class="fw-bolder">Ime</h5>
-        <p class="lead">Ime</p>
-        <p class="small">Genre: <strong>Ime</strong></p>
-        <p class="small">Album: <strong>Ime</strong></p>
-        <p class="small">Media type: <strong>Ime</strong></p>
+        <h5 class="fw-bolder">{{ track.name }}</h5>
+        <p class="lead">{{ track.artist.name }}</p>
+        <p class="small">
+          Genre: <strong>{{ track.genre.name }}</strong>
+        </p>
+        <p class="small">
+          Album: <strong>{{ track.album.name }}</strong>
+        </p>
+        <p class="small">
+          Media type: <strong>{{ track.mediaType.name }}</strong>
+        </p>
         <!-- Product price-->
-        $1.99
+        $ {{ track.price }}
       </div>
     </div>
     <!-- Product actions-->
     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
       <div class="text-center">
-        <a class="btn btn-outline-dark mt-auto" routerLink="/tracks/2"
+        <a
+          class="btn btn-outline-dark mt-auto"
+          routerLink="/tracks/{{ track.id }}"
           >View details</a
         >
       </div>

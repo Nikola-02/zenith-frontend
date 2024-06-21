@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TracksService } from './tracks.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpService } from '../../shared/services/pop-up.service';
+import { ITrack } from '../../shared/interfaces/i-track';
+import { IGetResponse } from '../../shared/interfaces/i-get-response';
 
 @Component({
   selector: 'app-tracks',
@@ -9,8 +11,8 @@ import { PopUpService } from '../../shared/services/pop-up.service';
   styleUrl: './tracks.component.scss',
 })
 export class TracksComponent implements OnInit {
-  public tracks = [];
-  public serverError = '';
+  public tracks: ITrack[] = [];
+  public search: string = '';
   @ViewChild('filter_div') filterDiv!: ElementRef;
 
   constructor(
@@ -19,19 +21,25 @@ export class TracksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tracksService.fetchTracks().subscribe({
+    this.fetchTracks();
+  }
+
+  fetchTracks() {
+    this.tracksService.fetchTracks(this.search).subscribe({
       next: (response) => {
-        this.serverError = '';
+        let responseObj: IGetResponse = response as IGetResponse;
+
+        this.tracks = responseObj.data;
       },
       error: (error) => {
         console.log(error);
 
         if (error.status == 500) {
-          this.serverError = 'Error occurred in database.';
+          this.popUpService.show('Error occured.', 'error-snack-bar');
           return;
         }
 
-        this.serverError = 'Error occurred.';
+        this.popUpService.show('Error occured.', 'error-snack-bar');
       },
     });
   }

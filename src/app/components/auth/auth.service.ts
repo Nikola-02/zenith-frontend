@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { IRegisterUser } from '../../shared/interfaces/i-register-user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environment';
+import { environment, noAuthOptions } from '../../../environment';
 import { ILoginUser } from '../../shared/interfaces/i-login-user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
@@ -15,12 +15,6 @@ export class AuthService implements OnInit {
   public $userSubject = new BehaviorSubject<IUser | null>(null);
   public $tokenExpired = new BehaviorSubject<string>('');
 
-  noAuthOptions = {
-    headers: new HttpHeaders({
-      'No-Auth': 'True',
-    }),
-  };
-
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
   ngOnInit(): void {
@@ -28,15 +22,11 @@ export class AuthService implements OnInit {
   }
 
   register(formValues: IRegisterUser) {
-    return this.http.post(
-      `${this.apiUrl}users`,
-      formValues,
-      this.noAuthOptions
-    );
+    return this.http.post(`${this.apiUrl}users`, formValues, noAuthOptions);
   }
 
   login(formValues: ILoginUser) {
-    return this.http.post(`${this.apiUrl}auth`, formValues, this.noAuthOptions);
+    return this.http.post(`${this.apiUrl}auth`, formValues, noAuthOptions);
   }
 
   notifyForLoggedUser() {

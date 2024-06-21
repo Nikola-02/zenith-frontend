@@ -25,13 +25,15 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('user_token');
+    let token = localStorage.getItem('user_token');
 
     if (req.headers.get('No-Auth') === 'True') {
       return next.handle(req.clone());
     }
 
     if (token) {
+      console.log('poslatooo');
+
       let user = this.jwtHelper.decodeToken(token);
 
       if (logoutIfTokenExpired(user)) {
