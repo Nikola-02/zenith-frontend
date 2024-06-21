@@ -43,12 +43,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { DialogComponent } from './abstract/dialog/dialog.component';
 
 @NgModule({
-  declarations: [
-    DialogComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     MatAutocompleteModule,

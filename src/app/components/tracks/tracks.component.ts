@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { TracksService } from './tracks.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpService } from '../../shared/services/pop-up.service';
 
 @Component({
   selector: 'app-tracks',
@@ -11,7 +13,10 @@ export class TracksComponent implements OnInit {
   public serverError = '';
   @ViewChild('filter_div') filterDiv!: ElementRef;
 
-  constructor(private tracksService: TracksService) {}
+  constructor(
+    private tracksService: TracksService,
+    private popUpService: PopUpService
+  ) {}
 
   ngOnInit(): void {
     this.tracksService.fetchTracks().subscribe({
@@ -32,6 +37,7 @@ export class TracksComponent implements OnInit {
   }
 
   onOpen() {
-    this.filterDiv.nativeElement.classList.toggle('active');
+    //this.filterDiv.nativeElement.classList.toggle('active');
+    this.popUpService.show('Error occured.', 'error-snack-bar');
   }
 }
