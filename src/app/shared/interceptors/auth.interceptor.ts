@@ -10,10 +10,16 @@ import {
 import { EMPTY, Observable } from 'rxjs';
 import { AuthService } from '../../components/auth/auth.service';
 import { Router } from '@angular/router';
+import { logoutIfTokenExpired } from '../../app.module';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private jwtHelper: JwtHelperService
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -26,6 +32,14 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     if (token) {
+      let user = this.jwtHelper.decodeToken(token);
+
+      if (logoutIfTokenExpired(user)) {
+        this.router.navigate(['/login']);
+        this.authService.notifyTokenExpired();
+        return EMPTY;
+      }
+
       const clonedReq = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`),
       });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { IUser } from '../../../shared/interfaces/i-user';
 import { Router } from '@angular/router';
+import { logoutIfTokenExpired } from '../../../app.module';
 
 @Component({
   selector: 'app-nav',
@@ -19,9 +20,7 @@ export class NavComponent implements OnInit {
       console.log(user);
 
       if (user) {
-        if (new Date(user?.exp).getTime() <= new Date().getTime()) {
-          this.logout();
-        }
+        if (logoutIfTokenExpired(user)) this.expiredTokenLogout();
       }
 
       this.user = user as IUser;
@@ -38,5 +37,13 @@ export class NavComponent implements OnInit {
     this.authService.logout();
 
     this.router.navigate(['/']);
+  }
+
+  expiredTokenLogout() {
+    this.authService.logout();
+
+    this.authService.notifyTokenExpired();
+
+    this.router.navigate(['/login']);
   }
 }

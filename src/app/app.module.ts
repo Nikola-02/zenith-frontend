@@ -13,6 +13,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { SharedModule } from './shared/shared.module';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,15 +34,40 @@ import { JwtModule } from '@auth0/angular-jwt';
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('user_token'),
-        allowedDomains: ['example.com'], // Dodajte domene na kojima želite da šaljete zahteve
+        allowedDomains: ['example.com'],
       },
     }),
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
 
 export function tokenGetter() {
   return localStorage.getItem('user_token');
+}
+
+export function logoutIfTokenExpired(user): boolean {
+  const currentTimeUTC = Date.UTC(
+    new Date().getUTCFullYear(),
+    new Date().getUTCMonth(),
+    new Date().getUTCDate(),
+    new Date().getUTCHours(),
+    new Date().getUTCMinutes(),
+    new Date().getUTCSeconds(),
+    new Date().getUTCMilliseconds()
+  );
+
+  let tokenExp = user?.exp * 1000;
+
+  console.log(tokenExp - currentTimeUTC);
+
+  return tokenExp <= currentTimeUTC;
 }

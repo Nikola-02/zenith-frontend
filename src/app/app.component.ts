@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './components/auth/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { AuthService } from './components/auth/auth.service';
 export class AppComponent {
   title = 'zenith-frontend';
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    public jwtHelper: JwtHelperService
+  ) {
     this.authService.notifyForLoggedUser();
   }
 }

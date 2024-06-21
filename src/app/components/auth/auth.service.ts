@@ -53,6 +53,14 @@ export class AuthService implements OnInit {
     this.$tokenExpired.next('Token expired. Please login again.');
   }
 
+  isUnauthorized() {
+    return !this.getTokenFromLS();
+  }
+
+  getTokenFromLS() {
+    return localStorage.getItem('user_token');
+  }
+
   logout() {
     localStorage.removeItem('user_token');
 
