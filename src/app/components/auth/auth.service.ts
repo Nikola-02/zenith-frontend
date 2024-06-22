@@ -43,6 +43,8 @@ export class AuthService implements OnInit {
       if (logoutIfTokenExpired(user)) {
         this.$userSubject.next(null);
 
+        localStorage.removeItem('user_token');
+
         this.router.navigate(['/login']);
         return;
       }
