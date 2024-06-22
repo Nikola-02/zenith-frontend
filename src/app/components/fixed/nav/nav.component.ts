@@ -25,6 +25,8 @@ export class NavComponent implements OnInit {
         if (logoutIfTokenExpired(user)) {
           this.expiredTokenLogout();
         }
+      } else {
+        this.router.navigate(['/login']);
       }
 
       this.user = user as IUser;

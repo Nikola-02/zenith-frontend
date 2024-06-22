@@ -6,6 +6,7 @@ import { ILoginUser } from '../../shared/interfaces/i-login-user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
 import { IUser } from '../../shared/interfaces/i-user';
+import { logoutIfTokenExpired } from '../../app.module';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,12 @@ export class AuthService implements OnInit {
     const token = localStorage.getItem('user_token');
     if (token) {
       const user: IUser | null = this.jwtHelper.decodeToken(token);
+
+      if (logoutIfTokenExpired(user)) {
+        this.$userSubject.next(null);
+        return;
+      }
+
       this.$userSubject.next(user);
     } else {
       this.$userSubject.next(null);

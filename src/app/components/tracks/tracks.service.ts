@@ -13,10 +13,12 @@ export class TracksService {
 
   constructor(private http: HttpClient) {}
 
-  fetchTracks(search: string) {
+  fetchTracks(search: string, filters) {
     let data = {
       keyword: search,
+      ...filters,
     };
+    console.log(data);
 
     return this.http.get(`${this.apiUrl}tracks`, {
       headers: this.headersNoAuth,

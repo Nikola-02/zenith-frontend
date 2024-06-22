@@ -41,16 +41,22 @@
   <div class="content">
     <div class="group" *ngFor="let key of filtersKeys">
       <div class="subtitle">{{ key | capitalize }}</div>
-      <div *ngFor="let filter of filters[key]" #radioButtonDiv>
-        <input
-          type="radio"
-          class="{{ key }} rb"
-          [name]="key"
-          (change)="onFilterChange()"
-          value="{{ filter.id }}"
-        />
-        <label class="d-inline">{{ filter.name }}</label>
-      </div>
+      <form [formGroup]="form">
+        <div *ngFor="let filter of filters[key]" #radioButtonDiv>
+          <input
+            id="{{ key }} rb {{ filter.id }}"
+            type="radio"
+            class="{{ key }} rb"
+            [name]="key"
+            [formControlName]="key"
+            (change)="onFilterChange()"
+            value="{{ filter.id }}"
+          />
+          <label class="d-inline" for="{{ key }} rb {{ filter.id }}">{{
+            filter.name
+          }}</label>
+        </div>
+      </form>
     </div>
   </div>
   <div class="open">

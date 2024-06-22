@@ -11,6 +11,7 @@ import { ITrack } from '../../shared/interfaces/i-track';
 import { IGetResponse } from '../../shared/interfaces/i-get-response';
 import { Subscription } from 'rxjs';
 import { IGetFilters } from '../../shared/interfaces/i-get-filters';
+import { FormControl, FormControlName, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tracks',
@@ -24,6 +25,12 @@ export class TracksComponent implements OnInit, OnDestroy {
   public filtersSub: Subscription;
   public filters: IGetFilters;
   public filtersKeys: string[] = ['albums', 'artists', 'genres', 'mediaTypes'];
+  form = new FormGroup({
+    albums: new FormControl(''),
+    artists: new FormControl(''),
+    genres: new FormControl(''),
+    mediaTypes: new FormControl(''),
+  });
   @ViewChild('filter_div') filterDiv!: ElementRef;
 
   constructor(
@@ -37,24 +44,33 @@ export class TracksComponent implements OnInit, OnDestroy {
   }
 
   fetchTracks() {
-    this.tracksSub = this.tracksService.fetchTracks(this.search).subscribe({
-      next: (response) => {
-        let responseObj: IGetResponse<ITrack> =
-          response as IGetResponse<ITrack>;
+    let filterData = {
+      albumId: this.form.get('albums')?.value,
+      artistId: this.form.get('artists')?.value,
+      genreId: this.form.get('genres')?.value,
+      mediaTypeId: this.form.get('mediaTypes')?.value,
+    };
 
-        this.tracks = responseObj.data;
-      },
-      error: (error) => {
-        console.log(error);
+    this.tracksSub = this.tracksService
+      .fetchTracks(this.search, filterData)
+      .subscribe({
+        next: (response) => {
+          let responseObj: IGetResponse<ITrack> =
+            response as IGetResponse<ITrack>;
 
-        if (error.status == 500) {
+          this.tracks = responseObj.data;
+        },
+        error: (error) => {
+          console.log(error);
+
+          if (error.status == 500) {
+            this.popUpService.show('Error occured.', 'error-snack-bar');
+            return;
+          }
+
           this.popUpService.show('Error occured.', 'error-snack-bar');
-          return;
-        }
-
-        this.popUpService.show('Error occured.', 'error-snack-bar');
-      },
-    });
+        },
+      });
   }
 
   fetchFilters() {
@@ -85,7 +101,9 @@ export class TracksComponent implements OnInit, OnDestroy {
     });
   }
 
-  onFilterChange() {}
+  onFilterChange() {
+    this.fetchTracks();
+  }
 
   onOpen() {
     this.filterDiv.nativeElement.classList.toggle('active');
