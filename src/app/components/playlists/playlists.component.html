@@ -7,12 +7,12 @@
       </button>
     </div>
 
-    <!-- <div class="col-md-12 playlists" *ngIf="playlists.length; else noPlaylists">
-        <app-playlist
-          *ngFor="let playlist of playlists"
-          [playlist]="playlist"
-        ></app-playlist>
-      </div> -->
+    <div class="col-md-12 playlists" *ngIf="playlists.length; else noPlaylists">
+      <app-playlist
+        *ngFor="let playlist of playlists"
+        [playlist]="playlist"
+      ></app-playlist>
+    </div>
 
     <ng-template #noPlaylists>
       <div class="alert alert-danger p-4 my-5 no-playlists">

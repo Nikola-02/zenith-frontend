@@ -11,7 +11,7 @@ import { PopUpService } from '../../shared/services/pop-up.service';
   styleUrl: './playlists.component.scss',
 })
 export class PlaylistsComponent implements OnInit, OnDestroy {
-  public playlists: IPlaylist;
+  public playlists: IPlaylist[];
   playlistsForUserSub: Subscription;
   constructor(
     private playlistsService: PlaylistsService,
@@ -27,11 +27,12 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
       .fetchPlaylistsForUser()
       .subscribe({
         next: (response) => {
-          console.log(response);
+          let responseObj: IGetResponse<IPlaylist> =
+            response as IGetResponse<IPlaylist>;
 
-          //let responseObj: IGetResponse<IPlaylist> = response as IGetResponse<IPlaylist>;
+          this.playlists = responseObj.data;
 
-          //this.playlists = responseObj.data;
+          console.log(this.playlists);
         },
         error: (error) => {
           console.log(error);
