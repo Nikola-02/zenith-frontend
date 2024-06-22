@@ -17,6 +17,7 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
   private singleTrackSub: Subscription;
   private userSub: Subscription;
   public track: ITrack;
+  duration;
   @ViewChild('audio') audio;
 
   constructor(
@@ -45,6 +46,11 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
         let track: ITrack = response as ITrack;
 
         this.track = track;
+        this.duration =
+          Math.floor(this.track.duration / 60) +
+          ' m  ' +
+          (this.track.duration % 60) +
+          ' s';
       },
       error: (error) => {
         console.log(error);
