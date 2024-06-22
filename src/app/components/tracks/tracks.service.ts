@@ -9,20 +9,17 @@ export class TracksService {
   private apiUrl = environment.apiUrl;
   public headersNoAuth = new HttpHeaders({
     'No-Auth': 'True',
+    'Content-Type': 'application/json',
   });
 
   constructor(private http: HttpClient) {}
 
-  fetchTracks(search: string, filters) {
-    let data = {
-      keyword: search,
-      ...filters,
-    };
-    console.log(data);
+  fetchTracks(filters) {
+    console.log(filters);
 
     return this.http.get(`${this.apiUrl}tracks`, {
       headers: this.headersNoAuth,
-      params: data,
+      params: filters,
     });
   }
 

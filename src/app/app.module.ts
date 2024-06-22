@@ -71,3 +71,17 @@ export function logoutIfTokenExpired(user): boolean {
 
   return tokenExp <= currentTimeUTC;
 }
+
+export function getSortParamsFromString(input: string): {
+  property: string;
+  direction: string;
+} {
+  const [property, direction] = input.split('-');
+  const capitalizeDirection =
+    direction.charAt(0).toUpperCase() + direction.slice(1);
+
+  return {
+    property,
+    direction: capitalizeDirection,
+  };
+}

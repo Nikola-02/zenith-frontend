@@ -33,8 +33,35 @@
     </div>
   </div>
 
-  <div class="tracks" *ngIf="tracks.length; else noTracks">
-    <app-track *ngFor="let track of tracks" [track]="track"></app-track>
+  <div class="tracks" *ngIf="tracksReponseObj.data.length; else noTracks">
+    <app-track
+      *ngFor="let track of tracksReponseObj.data"
+      [track]="track"
+    ></app-track>
+  </div>
+  <div class="pagination-div">
+    <button
+      class="btn last-page-btn"
+      (click)="prevPage()"
+      [class.disabled]="page <= 1"
+    >
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button
+      *ngFor="let b of counter(tracksReponseObj.pages); index as i"
+      class="page-btn"
+      [class.current-page]="i + 1 == page"
+      (click)="setPage(i + 1)"
+    >
+      {{ i + 1 }}
+    </button>
+    <button
+      (click)="nextPage()"
+      class="btn next-page-btn"
+      [class.disabled]="page >= tracksReponseObj.pages"
+    >
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
   </div>
 
   <ng-template #noTracks>

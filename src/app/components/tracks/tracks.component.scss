@@ -90,3 +90,35 @@
 .side-filter.active {
   left: 0;
 }
+
+.pagination-div {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid vars.$darkPurple;
+    color: vars.$darkPurple;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0 4px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .page-btn {
+    background-color: vars.$darkPurple;
+    color: vars.$white;
+  }
+
+  .current-page {
+    color: vars.$white;
+    background-color: vars.$lightPurple;
+    border: 1px solid vars.$lightPurple;
+  }
+}

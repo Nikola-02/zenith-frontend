@@ -12,6 +12,8 @@ import { IGetResponse } from '../../shared/interfaces/i-get-response';
 import { Subscription } from 'rxjs';
 import { IGetFilters } from '../../shared/interfaces/i-get-filters';
 import { FormControl, FormControlName, FormGroup } from '@angular/forms';
+import { getSortParamsFromString } from '../../app.module';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-tracks',
@@ -19,12 +21,13 @@ import { FormControl, FormControlName, FormGroup } from '@angular/forms';
   styleUrl: './tracks.component.scss',
 })
 export class TracksComponent implements OnInit, OnDestroy {
-  public tracks: ITrack[] = [];
+  public tracksReponseObj: IGetResponse<ITrack>;
   public search: string = '';
   public tracksSub: Subscription;
   public filtersSub: Subscription;
   public filters: IGetFilters;
   public sort: string = '';
+  public page = 1;
   public filtersKeys: string[] = ['albums', 'artists', 'genres', 'mediaTypes'];
   form = new FormGroup({
     albums: new FormControl(''),
@@ -45,33 +48,64 @@ export class TracksComponent implements OnInit, OnDestroy {
   }
 
   fetchTracks() {
-    let filterData = {
-      albumId: this.form.get('albums')?.value,
-      artistId: this.form.get('artists')?.value,
-      genreId: this.form.get('genres')?.value,
-      mediaTypeId: this.form.get('mediaTypes')?.value,
-    };
+    let params = new HttpParams();
 
-    this.tracksSub = this.tracksService
-      .fetchTracks(this.search, filterData)
-      .subscribe({
-        next: (response) => {
-          let responseObj: IGetResponse<ITrack> =
-            response as IGetResponse<ITrack>;
+    if (this.search) {
+      params = params.set('keyword', this.search);
+    }
 
-          this.tracks = responseObj.data;
-        },
-        error: (error) => {
-          console.log(error);
+    let albumId = this.form.get('albums')?.value;
+    let artistId = this.form.get('artists')?.value;
+    let genreId = this.form.get('genres')?.value;
+    let mediaTypeId = this.form.get('mediaTypes')?.value;
 
-          if (error.status == 500) {
-            this.popUpService.show('Error occured.', 'error-snack-bar');
-            return;
-          }
+    if (albumId) {
+      params = params.set('albumId', albumId);
+    }
 
+    if (artistId) {
+      params = params.set('artistId', artistId);
+    }
+
+    if (genreId) {
+      params = params.set('genreId', genreId);
+    }
+
+    if (mediaTypeId) {
+      params = params.set('mediaTypeId', mediaTypeId);
+    }
+
+    if (this.sort != '') {
+      let sortObj = getSortParamsFromString(this.sort);
+
+      params = params.set('Sort.SortProperty', sortObj.property);
+      params = params.set('Sort.Direction', sortObj.direction);
+    }
+
+    const perPage = 4;
+
+    params = params.set('perPage', perPage);
+
+    params = params.set('page', this.page);
+
+    this.tracksSub = this.tracksService.fetchTracks(params).subscribe({
+      next: (response) => {
+        let responseObj: IGetResponse<ITrack> =
+          response as IGetResponse<ITrack>;
+
+        this.tracksReponseObj = responseObj;
+      },
+      error: (error) => {
+        console.log(error);
+
+        if (error.status == 500) {
           this.popUpService.show('Error occured.', 'error-snack-bar');
-        },
-      });
+          return;
+        }
+
+        this.popUpService.show('Error occured.', 'error-snack-bar');
+      },
+    });
   }
 
   fetchFilters() {
@@ -110,6 +144,29 @@ export class TracksComponent implements OnInit, OnDestroy {
     this.filterDiv.nativeElement.classList.toggle('active');
 
     //this.popUpService.show('Error occured.', 'success-snack-bar');
+  }
+
+  setPage(newPage: number) {
+    this.page = newPage;
+    this.fetchTracks();
+  }
+
+  prevPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.fetchTracks();
+    }
+  }
+
+  nextPage() {
+    if (this.page < this.tracksReponseObj.pages) {
+      this.page++;
+      this.fetchTracks();
+    }
+  }
+
+  counter(i: number) {
+    return new Array(i);
   }
 
   ngOnDestroy(): void {

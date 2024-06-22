@@ -91,4 +91,33 @@
 
 .side-filter.active {
   left: 0;
+}
+
+.pagination-div {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+.pagination-div button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #342659;
+  color: #342659;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 0 4px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.pagination-div .page-btn {
+  background-color: #342659;
+  color: #f7f7f7;
+}
+.pagination-div .current-page {
+  color: #f7f7f7;
+  background-color: #6f4fc2;
+  border: 1px solid #6f4fc2;
 }/*# sourceMappingURL=tracks.component.css.map */
