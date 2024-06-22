@@ -85,6 +85,8 @@ export class TracksComponent implements OnInit, OnDestroy {
     });
   }
 
+  onFilterChange() {}
+
   onOpen() {
     this.filterDiv.nativeElement.classList.toggle('active');
 

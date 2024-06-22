@@ -39,6 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
       if (logoutIfTokenExpired(user)) {
         this.router.navigate(['/login']);
         this.authService.notifyTokenExpired();
+        this.authService.logout();
         return EMPTY;
       }
 

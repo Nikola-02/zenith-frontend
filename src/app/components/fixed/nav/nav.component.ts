@@ -22,7 +22,9 @@ export class NavComponent implements OnInit {
       console.log(user);
 
       if (user) {
-        if (logoutIfTokenExpired(user)) this.expiredTokenLogout();
+        if (logoutIfTokenExpired(user)) {
+          this.expiredTokenLogout();
+        }
       }
 
       this.user = user as IUser;
