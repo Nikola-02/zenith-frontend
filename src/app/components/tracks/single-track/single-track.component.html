@@ -31,7 +31,7 @@
         <div class="small mb-3 mt-1">
           Duration:
           <p class="lead">
-            <strong>{{ duration }}</strong>
+            <strong>{{ track.duration | fromSecToMin }}</strong>
           </p>
         </div>
         <div class="small mb-3 mt-1">
@@ -41,7 +41,10 @@
           </p>
         </div>
         <div class="mb-3 mt-1 likesDiv">
-          <i (click)="likeTrack(track.id)" class="fa-regular fa-heart"></i
+          <i
+            (click)="likeOrUndoLikeTrack(track.id)"
+            class="{{ liked ? 'fa-solid' : 'fa-regular' }} fa-heart"
+          ></i
           ><span class="lead mx-2"
             ><strong
               >{{ track.likesCount }}

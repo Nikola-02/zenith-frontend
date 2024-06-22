@@ -44,9 +44,10 @@ import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { FromSecToMinPipe } from './pipes/from-sec-to-min.pipe';
 
 @NgModule({
-  declarations: [CapitalizePipe],
+  declarations: [CapitalizePipe, FromSecToMinPipe],
   imports: [
     CommonModule,
     MatAutocompleteModule,
@@ -126,6 +127,7 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     CapitalizePipe,
+    FromSecToMinPipe,
   ],
 })
 export class SharedModule {}

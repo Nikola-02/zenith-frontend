@@ -30,4 +30,16 @@ export class TracksService {
   fetchFilters() {
     return this.http.get(`${this.apiUrl}filters`, noAuthOptions);
   }
+
+  isTrackLiked(trackId) {
+    return this.http.get(`${this.apiUrl}trackLikes/` + trackId);
+  }
+
+  likeTrack(trackId) {
+    return this.http.post(`${this.apiUrl}trackLikes`, { trackId });
+  }
+
+  undoLikeTrack(trackId) {
+    return this.http.delete(`${this.apiUrl}trackLikes/` + trackId);
+  }
 }

@@ -16,8 +16,11 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
   public user: IUser;
   private singleTrackSub: Subscription;
   private userSub: Subscription;
+  private likeSub: Subscription;
+  private undoLike: Subscription;
+  private isLikedSub: Subscription;
   public track: ITrack;
-  duration;
+  public liked: boolean = false;
   @ViewChild('audio') audio;
 
   constructor(
@@ -28,15 +31,16 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      let id = params['id'];
-      this.fetchSingleTrack(id);
-    });
-
     this.userSub = this.authService.$userSubject.subscribe((user) => {
       console.log(user);
 
       this.user = user as IUser;
+    });
+
+    this.route.params.subscribe((params) => {
+      let id = params['id'];
+      this.fetchSingleTrack(id);
+      this.isTrackLiked(id);
     });
   }
 
@@ -46,11 +50,6 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
         let track: ITrack = response as ITrack;
 
         this.track = track;
-        this.duration =
-          Math.floor(this.track.duration / 60) +
-          ' m  ' +
-          (this.track.duration % 60) +
-          ' s';
       },
       error: (error) => {
         console.log(error);
@@ -65,11 +64,98 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
     });
   }
 
-  likeTrack(trackId) {
+  likeOrUndoLikeTrack(trackId) {
     if (!this.user) {
       this.popUpService.show('Log in to like a song.', 'error-snack-bar');
       return;
     }
+
+    if (this.liked) {
+      this.undoLike = this.tracksService.undoLikeTrack(trackId).subscribe({
+        next: (response) => {
+          this.liked = false;
+          this.fetchSingleTrack(trackId);
+          this.popUpService.show(
+            'Thanks for feedback. We will improve track soon!',
+            'success-snack-bar'
+          );
+          console.log(response);
+        },
+        error: (error) => {
+          console.log(error);
+
+          if (error.status == 500) {
+            this.popUpService.show(
+              'Error occured while trying to undo like a track.',
+              'error-snack-bar'
+            );
+            return;
+          }
+
+          this.popUpService.show(
+            'Error occured while trying to undo like a track.',
+            'error-snack-bar'
+          );
+        },
+      });
+    } else {
+      this.likeSub = this.tracksService.likeTrack(trackId).subscribe({
+        next: (response) => {
+          this.liked = true;
+          this.fetchSingleTrack(trackId);
+          this.popUpService.show('Thank you for like!', 'success-snack-bar');
+          console.log(response);
+        },
+        error: (error) => {
+          console.log(error);
+
+          if (error.status == 500) {
+            this.popUpService.show(
+              'Error occured while trying to like a track.',
+              'error-snack-bar'
+            );
+            return;
+          }
+
+          this.popUpService.show(
+            'Error occured while trying to like a track.',
+            'error-snack-bar'
+          );
+        },
+      });
+    }
+  }
+
+  isTrackLiked(trackId) {
+    if (!this.user) {
+      console.log(this.user);
+
+      return;
+    }
+
+    this.isLikedSub = this.tracksService.isTrackLiked(trackId).subscribe({
+      next: (response) => {
+        let newResponse = response as { exists: boolean };
+
+        this.liked = newResponse.exists;
+      },
+      error: (error) => {
+        console.log(error);
+
+        if (error.status == 500) {
+          this.popUpService.show(
+            'Error occured while trying to get your like.',
+            'error-snack-bar'
+          );
+          return;
+        }
+
+        this.popUpService.show(
+          'Error occured while trying to get your like.',
+          'error-snack-bar'
+        );
+      },
+    });
   }
 
   ngOnDestroy(): void {
@@ -79,6 +165,18 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
 
     if (this.userSub) {
       this.userSub.unsubscribe();
+    }
+
+    if (this.likeSub) {
+      this.likeSub.unsubscribe();
+    }
+
+    if (this.isLikedSub) {
+      this.isLikedSub.unsubscribe();
+    }
+
+    if (this.undoLike) {
+      this.undoLike.unsubscribe();
     }
   }
 }
