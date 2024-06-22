@@ -1,8 +1,8 @@
 import { ITrack } from './i-track';
 
-export interface IGetResponse {
+export interface IGetResponse<T> {
   currentPage: number;
-  data: ITrack[];
+  data: T[];
   pages: number;
   perPage: number;
   totalCount: number;

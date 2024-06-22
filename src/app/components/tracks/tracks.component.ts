@@ -6,7 +6,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { TracksService } from './tracks.service';
-import { MatDialog } from '@angular/material/dialog';
 import { PopUpService } from '../../shared/services/pop-up.service';
 import { ITrack } from '../../shared/interfaces/i-track';
 import { IGetResponse } from '../../shared/interfaces/i-get-response';
@@ -35,7 +34,8 @@ export class TracksComponent implements OnInit, OnDestroy {
   fetchTracks() {
     this.tracksSub = this.tracksService.fetchTracks(this.search).subscribe({
       next: (response) => {
-        let responseObj: IGetResponse = response as IGetResponse;
+        let responseObj: IGetResponse<ITrack> =
+          response as IGetResponse<ITrack>;
 
         this.tracks = responseObj.data;
       },

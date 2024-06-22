@@ -1,0 +1,22 @@
+$lightPurple: #6f4fc2;
+$darkPurple: #342659;
+$white: #e3e3e3;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.playlist {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $lightPurple;
+  color: $white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+}

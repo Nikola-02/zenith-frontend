@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 playlist-title">
+      <h1>My Playlists</h1>
+      <button routerLink="/playlists/create" class="btn create-playlist-btn">
+        Create playlist
+      </button>
+    </div>
+
+    <!-- <div class="col-md-12 playlists" *ngIf="playlists.length; else noPlaylists">
+        <app-playlist
+          *ngFor="let playlist of playlists"
+          [playlist]="playlist"
+        ></app-playlist>
+      </div> -->
+
+    <ng-template #noPlaylists>
+      <div class="alert alert-danger p-4 my-5 no-playlists">
+        <p>There is no playlists.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

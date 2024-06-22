@@ -1,0 +1,39 @@
+$lightPurple: #6f4fc2;
+$darkPurple: #342659;
+$white: #e3e3e3;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  margin: 0px auto;
+  margin-top: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .row {
+    width: 70%;
+    .playlist-title {
+      button {
+        margin-top: 20px;
+        padding: 6px 12px;
+        background-color: $lightPurple;
+        color: #fff;
+      }
+    }
+
+    .playlists {
+      margin-top: 40px;
+      margin-bottom: 250px;
+    }
+
+    .no-playlists {
+      margin-bottom: 400px;
+    }
+  }
+}

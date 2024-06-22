@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.playlist {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #6f4fc2;
+  color: #e3e3e3;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+}/*# sourceMappingURL=playlist.component.css.map */

@@ -1,19 +1,27 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment, noAuthOptions } from '../../../environment';
-import { ITrack } from '../../shared/interfaces/i-track';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TracksService {
   private apiUrl = environment.apiUrl;
+  public headersNoAuth = new HttpHeaders({
+    'No-Auth': 'True',
+  });
 
   constructor(private http: HttpClient) {}
 
   fetchTracks(search: string) {
-    return this.http.get(`${this.apiUrl}tracks`, noAuthOptions);
+    let data = {
+      keyword: search,
+    };
+
+    return this.http.get(`${this.apiUrl}tracks`, {
+      headers: this.headersNoAuth,
+      params: data,
+    });
   }
 
   fetchSingleTrack(id) {

@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  margin: 0px auto;
+  margin-top: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.container .row {
+  width: 70%;
+}
+.container .row .playlist-title button {
+  margin-top: 20px;
+  padding: 6px 12px;
+  background-color: #6f4fc2;
+  color: #fff;
+}
+.container .row .playlists {
+  margin-top: 40px;
+  margin-bottom: 250px;
+}
+.container .row .no-playlists {
+  margin-bottom: 400px;
+}/*# sourceMappingURL=playlists.component.css.map */

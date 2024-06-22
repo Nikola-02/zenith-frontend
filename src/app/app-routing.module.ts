@@ -29,13 +29,13 @@ const routes: Routes = [
             (m) => m.TracksModule
           ),
       },
-      // {
-      //   path: 'shopping-list',
-      //   loadChildren: () =>
-      //     import('./components/shopping-list/shopping-list.module').then(
-      //       (m) => m.ShoppingListModule
-      //     ),
-      // },
+      {
+        path: 'playlists',
+        loadChildren: () =>
+          import('./components/playlists/playlists.module').then(
+            (m) => m.PlaylistsModule
+          ),
+      },
       // { path: 'contact-us', component: ContactUsComponent },
       // { path: 'author', component: AuthorComponent },
 
