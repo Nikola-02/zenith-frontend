@@ -24,6 +24,7 @@ export class TracksComponent implements OnInit, OnDestroy {
   public tracksSub: Subscription;
   public filtersSub: Subscription;
   public filters: IGetFilters;
+  public sort: string = '';
   public filtersKeys: string[] = ['albums', 'artists', 'genres', 'mediaTypes'];
   form = new FormGroup({
     albums: new FormControl(''),

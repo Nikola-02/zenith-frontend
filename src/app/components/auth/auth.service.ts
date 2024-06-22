@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
 import { IUser } from '../../shared/interfaces/i-user';
 import { logoutIfTokenExpired } from '../../app.module';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,11 @@ export class AuthService implements OnInit {
   public $userSubject = new BehaviorSubject<IUser | null>(null);
   public $tokenExpired = new BehaviorSubject<string>('');
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.notifyForLoggedUser();
@@ -37,6 +42,8 @@ export class AuthService implements OnInit {
 
       if (logoutIfTokenExpired(user)) {
         this.$userSubject.next(null);
+
+        this.router.navigate(['/login']);
         return;
       }
 

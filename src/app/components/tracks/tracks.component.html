@@ -17,9 +17,14 @@
 
     <div class="sort-div">
       <p class="mb-2">Sort by:</p>
-      <select id="sortDdl" class="form-select" [selectedIndex]="0">
-        <!-- (change)="fetchTracks()"
-        [(ngModel)]="sort" -->
+      <select
+        id="sortDdl"
+        class="form-select"
+        (change)="fetchTracks()"
+        [(ngModel)]="sort"
+        [selectedIndex]="0"
+      >
+        <option value="">Select sort</option>
         <option value="price-asc">Price ascending</option>
         <option value="price-desc">Price descending</option>
         <option value="name-asc">Name ascending</option>
