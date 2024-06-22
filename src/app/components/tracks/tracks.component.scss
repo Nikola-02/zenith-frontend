@@ -48,9 +48,9 @@
   position: fixed;
   top: 50%;
   transform: translate(0%, -45%);
-  left: -150px; /* Promenjena širina div-a */
-  width: 200px; /* Promenjena širina div-a */
-  height: 80vh; /* Visina celog browsera */
+  left: -165px;
+  width: 220px;
+  height: 81vh;
   background-color: vars.$lightPurple;
   transition: left 0.3s ease;
   z-index: 99999;
@@ -73,7 +73,7 @@
     margin-bottom: 5px;
   }
 
-  input[type="checkbox"] {
+  input[type="radio"] {
     margin-right: 5px;
   }
 

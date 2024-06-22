@@ -43,9 +43,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [CapitalizePipe],
   imports: [
     CommonModule,
     MatAutocompleteModule,
@@ -124,6 +125,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CapitalizePipe,
   ],
 })
 export class SharedModule {}

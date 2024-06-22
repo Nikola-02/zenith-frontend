@@ -39,18 +39,19 @@
 <div class="side-filter" #filter_div>
   <h4 class="header mb-4">Filters</h4>
   <div class="content">
-    <!-- <div class="group" *ngFor="let key of filtersKeys">
-      <div class="subtitle">{{ key }}</div>
-      <div *ngFor="let filter of filters[key]" #checkboxDiv>
+    <div class="group" *ngFor="let key of filtersKeys">
+      <div class="subtitle">{{ key | capitalize }}</div>
+      <div *ngFor="let filter of filters[key]" #radioButtonDiv>
+        <!-- (change)="onFilter()" -->
         <input
-          type="checkbox"
-          (change)="onFilter()"
-          class="{{ key }} chs"
+          type="radio"
+          class="{{ key }} rb"
+          [name]="key"
           value="{{ filter.id }}"
         />
         <label class="d-inline">{{ filter.name }}</label>
       </div>
-    </div> -->
+    </div>
   </div>
   <div class="open">
     <button class="btn" (click)="onOpen()">></button>

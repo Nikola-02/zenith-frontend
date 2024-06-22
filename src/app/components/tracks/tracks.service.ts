@@ -27,4 +27,8 @@ export class TracksService {
   fetchSingleTrack(id) {
     return this.http.get(`${this.apiUrl}tracks/` + id, noAuthOptions);
   }
+
+  fetchFilters() {
+    return this.http.get(`${this.apiUrl}filters`, noAuthOptions);
+  }
 }

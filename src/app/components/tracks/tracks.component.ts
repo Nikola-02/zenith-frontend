@@ -10,6 +10,7 @@ import { PopUpService } from '../../shared/services/pop-up.service';
 import { ITrack } from '../../shared/interfaces/i-track';
 import { IGetResponse } from '../../shared/interfaces/i-get-response';
 import { Subscription } from 'rxjs';
+import { IGetFilters } from '../../shared/interfaces/i-get-filters';
 
 @Component({
   selector: 'app-tracks',
@@ -20,6 +21,9 @@ export class TracksComponent implements OnInit, OnDestroy {
   public tracks: ITrack[] = [];
   public search: string = '';
   public tracksSub: Subscription;
+  public filtersSub: Subscription;
+  public filters: IGetFilters;
+  public filtersKeys: string[] = ['albums', 'artists', 'genres', 'mediaTypes'];
   @ViewChild('filter_div') filterDiv!: ElementRef;
 
   constructor(
@@ -29,6 +33,7 @@ export class TracksComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchTracks();
+    this.fetchFilters();
   }
 
   fetchTracks() {
@@ -52,6 +57,34 @@ export class TracksComponent implements OnInit, OnDestroy {
     });
   }
 
+  fetchFilters() {
+    this.filtersSub = this.tracksService.fetchFilters().subscribe({
+      next: (response) => {
+        let responseObj: IGetFilters = response as IGetFilters;
+
+        this.filters = responseObj;
+
+        console.log(this.filters);
+      },
+      error: (error) => {
+        console.log(error);
+
+        if (error.status == 500) {
+          this.popUpService.show(
+            'Error occured while fetching filters.',
+            'error-snack-bar'
+          );
+          return;
+        }
+
+        this.popUpService.show(
+          'Error occured while fetching filters.',
+          'error-snack-bar'
+        );
+      },
+    });
+  }
+
   onOpen() {
     this.filterDiv.nativeElement.classList.toggle('active');
 
@@ -61,6 +94,10 @@ export class TracksComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.tracksSub) {
       this.tracksSub.unsubscribe();
+    }
+
+    if (this.filtersSub) {
+      this.filtersSub.unsubscribe();
     }
   }
 }

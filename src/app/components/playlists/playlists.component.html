@@ -7,7 +7,7 @@
       </button>
     </div>
 
-    <div class="col-md-12 playlists" *ngIf="playlists.length; else noPlaylists">
+    <div class="col-md-12 playlists" *ngIf="playlists; else noPlaylists">
       <app-playlist
         *ngFor="let playlist of playlists"
         [playlist]="playlist"
