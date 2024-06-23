@@ -24,13 +24,11 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
   private undoLike: Subscription;
   private playlistsForUserSub: Subscription;
   private isLikedSub: Subscription;
+  private addTrackToPlaylistsSub: Subscription;
   public track: ITrack;
   public liked: boolean = false;
   public playlists: IPlaylist[] = [];
-  public playlistsSelect = new FormControl({
-    value: '',
-    disabled: !this.playlists,
-  });
+  public playlistsSelect = new FormControl();
   @ViewChild('audio') audio;
 
   constructor(
@@ -58,6 +56,8 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
       this.fetchSingleTrack(id);
       this.isTrackLiked(id);
       this.fetchPlaylistsForUser();
+
+      console.log(this.playlists);
     });
   }
 
@@ -70,6 +70,11 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.log(error);
+
+        if (error.status == 401) {
+          this.authService.logout();
+          return;
+        }
 
         if (error.status == 500) {
           this.popUpService.show('Error occured.', 'error-snack-bar');
@@ -86,13 +91,36 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
       .fetchPlaylistsForUser()
       .subscribe({
         next: (response) => {
+          console.log(response);
+
           let responseObj: IGetResponse<IPlaylist> =
             response as IGetResponse<IPlaylist>;
+
+          if (responseObj.data.length > 0) {
+            this.playlistsSelect.enable;
+          } else {
+            this.playlistsSelect.disable;
+          }
+
+          if (responseObj.data.length) {
+            console.log('daaaaaaaaaaafweaf');
+
+            let playlistsToBeSelected = responseObj.data
+              .filter((x) => x.tracks.map((y) => y.id).includes(this.track.id))
+              .map((h) => h.id);
+
+            this.playlistsSelect.patchValue(playlistsToBeSelected);
+          }
 
           this.playlists = responseObj.data;
         },
         error: (error) => {
           console.log(error);
+
+          if (error.status == 401) {
+            this.authService.logout();
+            return;
+          }
 
           if (error.status == 500) {
             this.popUpService.show('Error occured.', 'error-snack-bar');
@@ -124,6 +152,11 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
         error: (error) => {
           console.log(error);
 
+          if (error.status == 401) {
+            this.authService.logout();
+            return;
+          }
+
           if (error.status == 500) {
             this.popUpService.show(
               'Error occured while trying to undo like a track.',
@@ -148,6 +181,11 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.log(error);
+
+          if (error.status == 401) {
+            this.authService.logout();
+            return;
+          }
 
           if (error.status == 500) {
             this.popUpService.show(
@@ -182,6 +220,12 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.log(error);
 
+        if (error.status == 401) {
+          console.log('okeeeej bato');
+          this.authService.logout();
+          return;
+        }
+
         if (error.status == 500) {
           this.popUpService.show(
             'Error occured while trying to get your like.',
@@ -199,10 +243,46 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
   }
 
   addToPlaylists(trackId) {
-    this.playlistService.addTrackToPlaylists(
-      trackId,
-      this.playlistsSelect.value
-    );
+    let selectedPlaylistsArr = this.playlistsSelect.value;
+
+    this.addTrackToPlaylistsSub = this.playlistService
+      .addTrackToPlaylists(trackId, selectedPlaylistsArr)
+      .subscribe({
+        next: (response) => {
+          this.fetchPlaylistsForUser();
+
+          this.popUpService.show('Successfully saved.', 'success-snack-bar');
+        },
+        error: (error) => {
+          console.log(error);
+
+          if (error.status == 401) {
+            this.authService.logout();
+            return;
+          }
+
+          if (error.status == 422) {
+            let snackBarError = ``;
+
+            if (error.error.length > 1) {
+              error.error.forEach((element) => {
+                snackBarError += '\n' + element;
+              });
+            } else {
+              snackBarError += error.error[0].error;
+            }
+            this.popUpService.show(snackBarError, 'error-snack-bar');
+            return;
+          }
+
+          if (error.status == 500) {
+            this.popUpService.show('Error occured.', 'error-snack-bar');
+            return;
+          }
+
+          this.popUpService.show('Error occured.', 'error-snack-bar');
+        },
+      });
   }
 
   ngOnDestroy(): void {
@@ -228,6 +308,10 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
 
     if (this.playlistsForUserSub) {
       this.playlistsForUserSub.unsubscribe();
+    }
+
+    if (this.addTrackToPlaylistsSub) {
+      this.addTrackToPlaylistsSub.unsubscribe();
     }
   }
 }

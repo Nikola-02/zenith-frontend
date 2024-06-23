@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { IRegisterUser } from '../../../shared/interfaces/i-register-user';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { PopUpService } from '../../../shared/services/pop-up.service';
 

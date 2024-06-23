@@ -13,11 +13,15 @@ export class PlaylistsService {
   }
 
   addTrackToPlaylists(trackId, selectedPlaylists) {
-    console.log(selectedPlaylists);
+    if (!selectedPlaylists) {
+      selectedPlaylists = [];
+    }
 
-    // return this.http.post(`${environment.apiUrl}playlists/tracks`, {
-    //   trackId,
-    //   selectedPlaylists,
-    // });
+    let playlistIds = selectedPlaylists;
+
+    return this.http.post(`${environment.apiUrl}playlists/track`, {
+      trackId,
+      playlistIds,
+    });
   }
 }
