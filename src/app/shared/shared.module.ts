@@ -128,6 +128,7 @@ import { FromSecToMinPipe } from './pipes/from-sec-to-min.pipe';
     HttpClientModule,
     CapitalizePipe,
     FromSecToMinPipe,
+    ReactiveFormsModule,
   ],
 })
 export class SharedModule {}

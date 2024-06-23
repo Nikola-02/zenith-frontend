@@ -30,6 +30,7 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
   public playlists: IPlaylist[] = [];
   public playlistsSelect = new FormControl();
   @ViewChild('audio') audio;
+  @ViewChild('select') select;
 
   constructor(
     private tracksService: TracksService,
@@ -96,15 +97,7 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
           let responseObj: IGetResponse<IPlaylist> =
             response as IGetResponse<IPlaylist>;
 
-          if (responseObj.data.length > 0) {
-            this.playlistsSelect.enable;
-          } else {
-            this.playlistsSelect.disable;
-          }
-
           if (responseObj.data.length) {
-            console.log('daaaaaaaaaaafweaf');
-
             let playlistsToBeSelected = responseObj.data
               .filter((x) => x.tracks.map((y) => y.id).includes(this.track.id))
               .map((h) => h.id);
@@ -113,6 +106,12 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
           }
 
           this.playlists = responseObj.data;
+
+          if (this.playlists.length > 0) {
+            this.playlistsSelect.enable();
+          } else {
+            this.playlistsSelect.disable();
+          }
         },
         error: (error) => {
           console.log(error);

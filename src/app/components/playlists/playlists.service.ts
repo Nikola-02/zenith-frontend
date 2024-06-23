@@ -24,4 +24,8 @@ export class PlaylistsService {
       playlistIds,
     });
   }
+
+  createNewPlaylist(name: string) {
+    return this.http.post(`${environment.apiUrl}playlists`, { name });
+  }
 }
