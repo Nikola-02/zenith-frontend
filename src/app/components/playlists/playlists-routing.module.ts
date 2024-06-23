@@ -4,6 +4,7 @@ import { PlaylistsComponent } from './playlists.component';
 
 const routes: Routes = [
   { path: '', component: PlaylistsComponent },
+  //{ path: '/create', component: PlaylistsComponent },
   //{ path: ':id', component: SingleTrackComponent },
 ];
 

@@ -22,22 +22,14 @@ section {
         flex-direction: column;
         justify-content: center;
         .select-create-playlist-btns {
+          align-items: flex-start;
           gap: 20px;
-          select {
-            width: 35%;
-          }
 
           button {
-            padding: 6px 12px;
-          }
-        }
-
-        .add-to-playlist-btn {
-          margin-top: 15px;
-          button {
-            background-color: $lightPurple;
+            margin-top: 5px;
+            padding: 12px 24px;
+            background-color: #6f4fc2;
             color: $white;
-            padding: 6px 12px;
           }
         }
       }

@@ -11,4 +11,13 @@ export class PlaylistsService {
   fetchPlaylistsForUser() {
     return this.http.get(`${environment.apiUrl}playlists/mine`);
   }
+
+  addTrackToPlaylists(trackId, selectedPlaylists) {
+    console.log(selectedPlaylists);
+
+    // return this.http.post(`${environment.apiUrl}playlists/tracks`, {
+    //   trackId,
+    //   selectedPlaylists,
+    // });
+  }
 }

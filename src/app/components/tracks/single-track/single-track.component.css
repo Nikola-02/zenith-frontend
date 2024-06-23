@@ -20,21 +20,14 @@ section .container .row .col-md-5 {
   justify-content: center;
 }
 section .container .row .col-md-5 .select-create-playlist-btns {
+  align-items: flex-start;
   gap: 20px;
 }
-section .container .row .col-md-5 .select-create-playlist-btns select {
-  width: 35%;
-}
 section .container .row .col-md-5 .select-create-playlist-btns button {
-  padding: 6px 12px;
-}
-section .container .row .col-md-5 .add-to-playlist-btn {
-  margin-top: 15px;
-}
-section .container .row .col-md-5 .add-to-playlist-btn button {
+  margin-top: 5px;
+  padding: 12px 24px;
   background-color: #6f4fc2;
   color: #e3e3e3;
-  padding: 6px 12px;
 }
 section .container .row .audio-image {
   align-items: center;

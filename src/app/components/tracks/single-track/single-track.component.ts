@@ -6,6 +6,10 @@ import { ITrack } from '../../../shared/interfaces/i-track';
 import { PopUpService } from '../../../shared/services/pop-up.service';
 import { AuthService } from '../../auth/auth.service';
 import { IUser } from '../../../shared/interfaces/i-user';
+import { PlaylistsService } from '../../playlists/playlists.service';
+import { IGetResponse } from '../../../shared/interfaces/i-get-response';
+import { IPlaylist } from '../../../shared/interfaces/i-playlist';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-single-track',
@@ -18,16 +22,23 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
   private userSub: Subscription;
   private likeSub: Subscription;
   private undoLike: Subscription;
+  private playlistsForUserSub: Subscription;
   private isLikedSub: Subscription;
   public track: ITrack;
   public liked: boolean = false;
+  public playlists: IPlaylist[] = [];
+  public playlistsSelect = new FormControl({
+    value: '',
+    disabled: !this.playlists,
+  });
   @ViewChild('audio') audio;
 
   constructor(
     private tracksService: TracksService,
     private route: ActivatedRoute,
     private popUpService: PopUpService,
-    private authService: AuthService
+    private authService: AuthService,
+    private playlistService: PlaylistsService
   ) {}
 
   ngOnInit(): void {
@@ -35,12 +46,18 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
       console.log(user);
 
       this.user = user as IUser;
+
+      if (user) {
+        this.isTrackLiked(this.track.id);
+        this.fetchPlaylistsForUser();
+      }
     });
 
     this.route.params.subscribe((params) => {
       let id = params['id'];
       this.fetchSingleTrack(id);
       this.isTrackLiked(id);
+      this.fetchPlaylistsForUser();
     });
   }
 
@@ -62,6 +79,29 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
         this.popUpService.show('Error occured.', 'error-snack-bar');
       },
     });
+  }
+
+  fetchPlaylistsForUser() {
+    this.playlistsForUserSub = this.playlistService
+      .fetchPlaylistsForUser()
+      .subscribe({
+        next: (response) => {
+          let responseObj: IGetResponse<IPlaylist> =
+            response as IGetResponse<IPlaylist>;
+
+          this.playlists = responseObj.data;
+        },
+        error: (error) => {
+          console.log(error);
+
+          if (error.status == 500) {
+            this.popUpService.show('Error occured.', 'error-snack-bar');
+            return;
+          }
+
+          this.popUpService.show('Error occured.', 'error-snack-bar');
+        },
+      });
   }
 
   likeOrUndoLikeTrack(trackId) {
@@ -158,6 +198,13 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
     });
   }
 
+  addToPlaylists(trackId) {
+    this.playlistService.addTrackToPlaylists(
+      trackId,
+      this.playlistsSelect.value
+    );
+  }
+
   ngOnDestroy(): void {
     if (this.singleTrackSub) {
       this.singleTrackSub.unsubscribe();
@@ -177,6 +224,10 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
 
     if (this.undoLike) {
       this.undoLike.unsubscribe();
+    }
+
+    if (this.playlistsForUserSub) {
+      this.playlistsForUserSub.unsubscribe();
     }
   }
 }

@@ -53,21 +53,21 @@
           >
         </div>
         <div class="d-flex select-create-playlist-btns">
-          <!-- <select
-            id="playlist"
-            [(ngModel)]="playlistSelectValue"
-            class="form-select px-2"
-            [disabled]="!isDisabledPlaylistDdl || !playlists.length"
-            (change)="onAddTrackToPlaylist()"
-          >
-            <option value="0">Select a playlist</option>
-            <option *ngFor="let p of playlists" value="{{ p.id }}">
-              {{ p.name }}
-            </option>
-          </select> -->
+          <mat-form-field>
+            <mat-label>Add to playlist</mat-label>
+            <mat-select
+              [formControl]="playlistsSelect"
+              multiple
+              (closed)="addToPlaylists(track.id)"
+            >
+              @for (p of playlists; track p) {
+              <mat-option [value]="p.id">{{ p.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
 
-          <button class="btn btn-dark" routerLink="/playlists/create">
-            Create playlist
+          <button class="btn" routerLink="/playlists/create">
+            Create new playlist
           </button>
         </div>
         <!-- <div class="add-to-playlist-btn">
