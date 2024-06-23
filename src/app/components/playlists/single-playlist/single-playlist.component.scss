@@ -1,0 +1,51 @@
+$lightPurple: #6f4fc2;
+$darkPurple: #342659;
+$white: #e3e3e3;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.small {
+  border-top: 1px solid $darkPurple;
+  padding-top: 20px;
+}
+
+.container {
+  margin: 0px auto;
+  margin-top: 140px;
+  margin-bottom: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .row {
+    width: 90%;
+    .tracks-in-playlist {
+      margin-top: 30px;
+    }
+  }
+}
+
+.image-td {
+  width: 100px;
+  img {
+    width: 100%;
+  }
+}
+
+.btn {
+  border: none;
+  background-color: $darkPurple;
+  color: #fff;
+  font-size: 18px;
+  padding: 8px 22px;
+  transition: 0.3s all;
+
+  &:hover {
+    background-color: $lightPurple;
+  }
+}

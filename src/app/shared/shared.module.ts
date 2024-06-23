@@ -45,9 +45,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { FromSecToMinPipe } from './pipes/from-sec-to-min.pipe';
+import { IsoToRegularDatePipe } from './pipes/iso-to-regular-date.pipe';
 
 @NgModule({
-  declarations: [CapitalizePipe, FromSecToMinPipe],
+  declarations: [CapitalizePipe, FromSecToMinPipe, IsoToRegularDatePipe],
   imports: [
     CommonModule,
     MatAutocompleteModule,
@@ -129,6 +130,7 @@ import { FromSecToMinPipe } from './pipes/from-sec-to-min.pipe';
     CapitalizePipe,
     FromSecToMinPipe,
     ReactiveFormsModule,
+    IsoToRegularDatePipe,
   ],
 })
 export class SharedModule {}

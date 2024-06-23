@@ -6,12 +6,14 @@ import { PlaylistComponent } from './playlist/playlist.component';
 import { PlaylistsComponent } from './playlists.component';
 import { CreatePlaylistComponent } from './create-playlist/create-playlist.component';
 import { SharedModule } from '../../shared/shared.module';
+import { SinglePlaylistComponent } from './single-playlist/single-playlist.component';
 
 @NgModule({
   declarations: [
     PlaylistsComponent,
     PlaylistComponent,
     CreatePlaylistComponent,
+    SinglePlaylistComponent,
   ],
   imports: [CommonModule, PlaylistsRoutingModule, SharedModule],
 })

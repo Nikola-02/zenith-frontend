@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.small {
+  border-top: 1px solid #342659;
+  padding-top: 20px;
+}
+
+.container {
+  margin: 0px auto;
+  margin-top: 140px;
+  margin-bottom: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.container .row {
+  width: 90%;
+}
+.container .row .tracks-in-playlist {
+  margin-top: 30px;
+}
+
+.image-td {
+  width: 100px;
+}
+.image-td img {
+  width: 100%;
+}
+
+.btn {
+  border: none;
+  background-color: #342659;
+  color: #fff;
+  font-size: 18px;
+  padding: 8px 22px;
+  transition: 0.3s all;
+}
+.btn:hover {
+  background-color: #6f4fc2;
+}/*# sourceMappingURL=single-playlist.component.css.map */

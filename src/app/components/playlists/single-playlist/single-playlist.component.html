@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 single-playlist-title">
+      <h1 class="mb-3">{{ playlist.name }}</h1>
+      <div class="small">Created at:</div>
+      <p class="lead">
+        <strong>{{ playlist.createdAt | isoToRegularDate }}</strong>
+      </p>
+    </div>
+    <div class="tracks-in-playlist">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+            <th scope="col">Album</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Genre</th>
+            <th scope="col">MediaType</th>
+            <th scope="col">Go to track</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let track of playlist.tracks; let i = index">
+            <th scope="col">{{ i + 1 }}</th>
+            <td scope="col">{{ track.name }}</td>
+            <td>
+              <img
+                class="image-td"
+                src="http://localhost:5001/tracks/images/{{ track.image }}"
+                alt="{{ track.name }}"
+              />
+            </td>
+            <td scope="col">$ {{ track.price }}</td>
+            <td scope="col">{{ track.album.name }}</td>
+            <td scope="col">{{ track.artist.name }}</td>
+            <td scope="col">{{ track.genre.name }}</td>
+            <td scope="col">{{ track.mediaType.name }}</td>
+            <td>
+              <button
+                class="btn"
+                type="button"
+                routerLink="/tracks/{{ track.id }}"
+              >
+                Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -28,4 +28,8 @@ export class PlaylistsService {
   createNewPlaylist(name: string) {
     return this.http.post(`${environment.apiUrl}playlists`, { name });
   }
+
+  // fetchSinglePlaylist(id) {
+  //   return this.http.get(`${environment.apiUrl}playlists`);
+  // }
 }
