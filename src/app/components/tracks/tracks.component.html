@@ -11,7 +11,7 @@
         id="search"
         [(ngModel)]="search"
         (ngModelChange)="fetchTracks()"
-        placeholder="Type..."
+        placeholder="By title..."
       />
     </div>
 
@@ -90,6 +90,13 @@
         </div>
       </form>
     </div>
+    <button
+      type="reset"
+      class="btn btn-dark px-2 py-2"
+      (click)="onResetFilters()"
+    >
+      Reset filters
+    </button>
   </div>
   <div class="open">
     <button class="btn" (click)="onOpen()">></button>

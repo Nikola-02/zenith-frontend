@@ -82,7 +82,7 @@ export class TracksComponent implements OnInit, OnDestroy {
       params = params.set('Sort.Direction', sortObj.direction);
     }
 
-    const perPage = 4;
+    const perPage = 6;
 
     params = params.set('perPage', perPage);
 
@@ -137,6 +137,11 @@ export class TracksComponent implements OnInit, OnDestroy {
   }
 
   onFilterChange() {
+    this.fetchTracks();
+  }
+
+  onResetFilters() {
+    this.form.reset();
     this.fetchTracks();
   }
 
