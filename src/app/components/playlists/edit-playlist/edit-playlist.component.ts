@@ -15,6 +15,8 @@ import { Subscription } from 'rxjs';
 export class EditPlaylistComponent implements OnInit, OnDestroy {
   public playlist: IPlaylist;
   public singlePlaylistSub: Subscription;
+  public editPlaylistSub: Subscription;
+  public validationErrors;
 
   public form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -73,11 +75,43 @@ export class EditPlaylistComponent implements OnInit, OnDestroy {
       });
   }
 
-  onEditNewPlaylist(id) {}
+  onEditNewPlaylist(id) {
+    let playlistName = this.form.get('name')?.value;
+
+    if (playlistName) {
+      this.editPlaylistSub = this.playlistService
+        .editPlaylist(playlistName, id)
+        .subscribe({
+          next: (response) => {
+            this.popUpService.show('Successfully edited.', 'success-snack-bar');
+            this.router.navigate(['/playlists/' + id]);
+          },
+          error: (error) => {
+            console.log(error);
+
+            if (error.status == 422) {
+              this.validationErrors = error.error;
+              return;
+            }
+
+            if (error.status == 500) {
+              this.popUpService.show('Error occurred.', 'error-snack-bar');
+              return;
+            }
+
+            this.popUpService.show('Error occurred.', 'error-snack-bar');
+          },
+        });
+    }
+  }
 
   ngOnDestroy(): void {
     if (this.singlePlaylistSub) {
       this.singlePlaylistSub.unsubscribe();
+    }
+
+    if (this.editPlaylistSub) {
+      this.editPlaylistSub.unsubscribe();
     }
   }
 }

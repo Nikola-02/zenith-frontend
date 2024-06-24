@@ -32,4 +32,8 @@ export class PlaylistsService {
   deletePlaylist(id) {
     return this.http.delete(`${environment.apiUrl}playlists/` + id);
   }
+
+  editPlaylist(name, id) {
+    return this.http.put(`${environment.apiUrl}playlists/` + id, { name });
+  }
 }
