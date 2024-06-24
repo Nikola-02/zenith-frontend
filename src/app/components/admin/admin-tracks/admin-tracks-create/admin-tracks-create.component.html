@@ -1,1 +1,225 @@
-<p>admin-tracks-create works!</p>
+<div class="container p-5 playlist-create-container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <h1 class="text-center">Create track</h1>
+    </div>
+    <div class="col-md-6">
+      <form [formGroup]="form">
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputName1"
+            name="name"
+            formControlName="name"
+            required
+          />
+          <div
+            *ngIf="form.get('name')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Name is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="desc" class="form-label">Description</label>
+          <textarea
+            name="desc"
+            id="desc"
+            formControlName="description"
+            class="form-control"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="duration" class="form-label">Duration</label>
+          <input
+            type="number"
+            class="form-control"
+            id="duration"
+            name="duration"
+            formControlName="duration"
+            required
+            placeholder="In seconds"
+          />
+          <div
+            *ngIf="
+              form.get('duration')?.hasError('required') ||
+              form.get('duration')?.hasError('min')
+            "
+            class="alert alert-danger mt-2"
+          >
+            Duration is required and minimal duration is 15 seconds.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Price</label>
+          <input
+            type="number"
+            class="form-control"
+            id="duration"
+            name="price"
+            formControlName="price"
+            required
+            step="0.1"
+          />
+          <div
+            *ngIf="
+              form.get('price')?.hasError('required') ||
+              form.get('price')?.hasError('min')
+            "
+            class="alert alert-danger mt-2"
+          >
+            Price is required and has to be greater than 0.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="albums" class="form-label">Album</label>
+          <select
+            class="form-select"
+            name="albums"
+            id="albums"
+            formControlName="albumId"
+          >
+            <option *ngFor="let album of albums" [value]="album.id">
+              {{ album.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="form.get('albumId')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Album is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="artists" class="form-label">Artist</label>
+          <select
+            class="form-select"
+            name="artists"
+            id="artists"
+            formControlName="artistId"
+          >
+            <option *ngFor="let artist of artists" [value]="artist.id">
+              {{ artist.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="form.get('artistId')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Artist is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="genres" class="form-label">Genre</label>
+          <select
+            class="form-select"
+            name="genres"
+            id="genres"
+            formControlName="genreId"
+          >
+            <option *ngFor="let genre of genres" [value]="genre.id">
+              {{ genre.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="form.get('genreId')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Genre is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="genres" class="form-label">Genre</label>
+          <select
+            class="form-select"
+            name="genres"
+            id="genres"
+            formControlName="genreId"
+          >
+            <option *ngFor="let genre of genres" [value]="genre.id">
+              {{ genre.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="form.get('genreId')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Genre is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="mediaTypes" class="form-label">MediaType</label>
+          <select
+            class="form-select"
+            name="mediaTypes"
+            id="mediaTypes"
+            formControlName="mediaTypeId"
+          >
+            <option *ngFor="let mediaType of mediaTypes" [value]="mediaType.id">
+              {{ mediaType.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="form.get('mediaTypeId')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            MediaType is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Image</label>
+          <input
+            class="form-control"
+            type="file"
+            name="image"
+            formControlName="image"
+            id="image"
+            (change)="handleUploadFile($event)"
+          />
+          <span class="font-monospace"
+            >Supported formats are: jpg, jpeg, png</span
+          >
+          <div
+            *ngIf="form.get('image')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Image is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="audio" class="form-label">Audio</label>
+          <input
+            class="form-control"
+            type="file"
+            name="audio"
+            formControlName="audio"
+            id="audio"
+            (change)="handleUploadFile($event)"
+          />
+          <span class="font-monospace">Supported formats are: mp3, wav</span>
+          <div
+            *ngIf="form.get('audio')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Audio is required.
+          </div>
+        </div>
+        <button
+          [disabled]="!form.valid"
+          type="button"
+          class="btn btn-primary"
+          (click)="onCreateNewTrack()"
+        >
+          Create
+        </button>
+      </form>
+      <div *ngIf="validationErrors" class="alert alert-danger mt-3">
+        <p *ngFor="let error of validationErrors" class="mb-0 mt-1">
+          {{ error.error }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

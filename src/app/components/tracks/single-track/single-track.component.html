@@ -20,6 +20,7 @@
         <div class="fs-5 mb-3">
           <span>${{ track.price }}</span>
         </div>
+
         <p class="lead mb-3">{{ track.artist.name }}</p>
         <div class="small mb-3">
           Album:
@@ -39,6 +40,11 @@
           <p class="lead">
             <strong>.{{ track.mediaType.name }}</strong>
           </p>
+        </div>
+        <div class="fs-5 mb-3">
+          <span class="small">{{
+            !track.description ? "" : track.description
+          }}</span>
         </div>
         <div class="mb-3 mt-1 likesDiv">
           <i

@@ -1,1 +1,71 @@
-<p>admin-tracks-dashboard works!</p>
+<div class="container">
+  <div class="dashboard-title">
+    <h2>Tracks</h2>
+    <button class="btn btn-success" routerLink="/admin/tracks/create">
+      Create
+    </button>
+  </div>
+
+  <div class="tracks-admin-panel" *ngIf="tracks.length; else noTracks">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Image</th>
+          <th scope="col">Price</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Album</th>
+          <th scope="col">Artist</th>
+          <th scope="col">Genre</th>
+          <th scope="col">MediaType</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let track of tracks; let i = index">
+          <th scope="col">{{ i + 1 }}</th>
+          <td scope="col">{{ track.name }}</td>
+          <td>
+            <img
+              class="image-td"
+              src="http://localhost:5001/tracks/images/{{ track.image }}"
+              alt="{{ track.name }}"
+            />
+          </td>
+          <td scope="col">$ {{ track.price }}</td>
+          <td scope="col">{{ track.duration | fromSecToMin }}</td>
+          <td scope="col">{{ track.album.name }}</td>
+          <td scope="col">{{ track.artist.name }}</td>
+          <td scope="col">{{ track.genre.name }}</td>
+          <td scope="col">{{ track.mediaType.name }}</td>
+          <td>
+            <button
+              class="btn update-create-btn"
+              type="button"
+              routerLink="/tracks/{{ track.id }}"
+            >
+              Edit
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger"
+              type="button"
+              routerLink="/tracks/{{ track.id }}"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noTracks>
+    <div class="alert alert-danger p-4 my-5 no-playlists">
+      <p>There is no tracks.</p>
+    </div>
+  </ng-template>
+</div>

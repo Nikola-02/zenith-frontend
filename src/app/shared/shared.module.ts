@@ -49,7 +49,12 @@ import { IsoToRegularDatePipe } from './pipes/iso-to-regular-date.pipe';
 import { DeleteCheckDialogComponent } from './abstract/delete-check-dialog/delete-check-dialog.component';
 
 @NgModule({
-  declarations: [CapitalizePipe, FromSecToMinPipe, IsoToRegularDatePipe, DeleteCheckDialogComponent],
+  declarations: [
+    CapitalizePipe,
+    FromSecToMinPipe,
+    IsoToRegularDatePipe,
+    DeleteCheckDialogComponent,
+  ],
   imports: [
     CommonModule,
     MatAutocompleteModule,
