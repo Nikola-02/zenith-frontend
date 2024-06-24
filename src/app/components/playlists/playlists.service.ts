@@ -29,7 +29,7 @@ export class PlaylistsService {
     return this.http.post(`${environment.apiUrl}playlists`, { name });
   }
 
-  // fetchSinglePlaylist(id) {
-  //   return this.http.get(`${environment.apiUrl}playlists`);
-  // }
+  deletePlaylist(id) {
+    return this.http.delete(`${environment.apiUrl}playlists/` + id);
+  }
 }

@@ -99,6 +99,7 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
 
           if (responseObj.data.length) {
             let playlistsToBeSelected = responseObj.data
+              .filter((playlist) => playlist.tracks.length > 0)
               .filter((x) => x.tracks.map((y) => y.id).includes(this.track.id))
               .map((h) => h.id);
 
@@ -106,6 +107,8 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
           }
 
           this.playlists = responseObj.data;
+
+          console.log(this.playlists);
 
           if (this.playlists.length > 0) {
             this.playlistsSelect.enable();

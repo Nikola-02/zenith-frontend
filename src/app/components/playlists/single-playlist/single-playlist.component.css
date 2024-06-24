@@ -33,7 +33,7 @@
   width: 100%;
 }
 
-.btn {
+.details-btn {
   border: none;
   background-color: #342659;
   color: #fff;
@@ -41,6 +41,16 @@
   padding: 8px 22px;
   transition: 0.3s all;
 }
-.btn:hover {
+.details-btn:hover {
   background-color: #6f4fc2;
+}
+
+.update-delete-playlist-btns {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.update-delete-playlist-btns button {
+  font-size: 18px;
+  padding: 8px 22px;
 }/*# sourceMappingURL=single-playlist.component.css.map */

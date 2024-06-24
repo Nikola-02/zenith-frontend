@@ -37,7 +37,7 @@ $white: #e3e3e3;
   }
 }
 
-.btn {
+.details-btn {
   border: none;
   background-color: $darkPurple;
   color: #fff;
@@ -47,5 +47,15 @@ $white: #e3e3e3;
 
   &:hover {
     background-color: $lightPurple;
+  }
+}
+
+.update-delete-playlist-btns {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  button {
+    font-size: 18px;
+    padding: 8px 22px;
   }
 }

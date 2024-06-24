@@ -2,12 +2,26 @@
   <div class="row">
     <div class="col-md-12 single-playlist-title">
       <h1 class="mb-3">{{ playlist.name }}</h1>
+      <div class="update-delete-playlist-btns py-3">
+        <button
+          class="btn btn-success"
+          routerLink="/playlists/{{ playlist.id }}/edit"
+        >
+          Edit
+        </button>
+        <button class="btn btn-danger" (click)="deletePlaylist(playlist.id)">
+          Delete
+        </button>
+      </div>
       <div class="small">Created at:</div>
       <p class="lead">
         <strong>{{ playlist.createdAt | isoToRegularDate }}</strong>
       </p>
     </div>
-    <div class="tracks-in-playlist">
+    <div
+      class="tracks-in-playlist"
+      *ngIf="playlist.tracks.length; else noTracksInPlaylists"
+    >
       <table class="table">
         <thead>
           <tr>
@@ -40,7 +54,7 @@
             <td scope="col">{{ track.mediaType.name }}</td>
             <td>
               <button
-                class="btn"
+                class="btn details-btn"
                 type="button"
                 routerLink="/tracks/{{ track.id }}"
               >
@@ -51,5 +65,11 @@
         </tbody>
       </table>
     </div>
+
+    <ng-template #noTracksInPlaylists>
+      <div class="alert alert-danger p-4 my-5 no-playlists">
+        <p>There is no tracks in playlist.</p>
+      </div>
+    </ng-template>
   </div>
 </div>

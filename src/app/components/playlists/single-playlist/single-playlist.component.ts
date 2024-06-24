@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   ActivatedRoute,
   ActivatedRouteSnapshot,
@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
 import { PlaylistsService } from '../playlists.service';
 import { PopUpService } from '../../../shared/services/pop-up.service';
 import { IGetResponse } from '../../../shared/interfaces/i-get-response';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteCheckDialogComponent } from '../../../shared/abstract/delete-check-dialog/delete-check-dialog.component';
 
 @Component({
   selector: 'app-single-playlist',
@@ -17,7 +19,8 @@ import { IGetResponse } from '../../../shared/interfaces/i-get-response';
 })
 export class SinglePlaylistComponent implements OnInit {
   public playlist: IPlaylist;
-  private playlistSub: Subscription;
+  private deletePlaylistSub: Subscription;
+  readonly dialog = inject(MatDialog);
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +33,57 @@ export class SinglePlaylistComponent implements OnInit {
     this.route.params.subscribe((params) => {
       let id = params['id'];
       this.fetchSinglePlaylist(id);
+    });
+  }
+
+  deletePlaylist(id) {
+    const dialogRef = this.dialog.open(DeleteCheckDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deletePlaylistSub = this.playlistService
+          .deletePlaylist(id)
+          .subscribe({
+            next: (response) => {
+              console.log(response);
+              this.popUpService.show(
+                'Successfully deleted.',
+                'success-snack-bar'
+              );
+
+              this.router.navigate(['/playlists']);
+            },
+            error: (error) => {
+              console.log(error);
+
+              if (error.status == 422) {
+                let snackBarError = ``;
+
+                if (error.error.length > 1) {
+                  error.error.forEach((element) => {
+                    snackBarError += '\n' + element;
+                  });
+                } else {
+                  snackBarError += error.error[0].error;
+                }
+                this.popUpService.show(snackBarError, 'error-snack-bar');
+                return;
+              }
+
+              if (error.status == 500) {
+                this.popUpService.show(
+                  'Error occurred while deleting playlist.',
+                  'error-snack-bar'
+                );
+                return;
+              }
+
+              this.popUpService.show(
+                'Error occurred while deleting playlist.',
+                'error-snack-bar'
+              );
+            },
+          });
+      }
     });
   }
 

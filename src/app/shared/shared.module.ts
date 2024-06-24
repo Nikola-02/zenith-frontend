@@ -46,9 +46,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { FromSecToMinPipe } from './pipes/from-sec-to-min.pipe';
 import { IsoToRegularDatePipe } from './pipes/iso-to-regular-date.pipe';
+import { DeleteCheckDialogComponent } from './abstract/delete-check-dialog/delete-check-dialog.component';
 
 @NgModule({
-  declarations: [CapitalizePipe, FromSecToMinPipe, IsoToRegularDatePipe],
+  declarations: [CapitalizePipe, FromSecToMinPipe, IsoToRegularDatePipe, DeleteCheckDialogComponent],
   imports: [
     CommonModule,
     MatAutocompleteModule,
