@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminLayoutComponent } from '../layout/admin-layout/admin-layout.component';
+import { AdminComponent } from './admin.component';
 
 const routes: Routes = [
   {
+    path: '',
     children: [
-      { path: '', redirectTo: 'tracks', pathMatch: 'full' },
+      { path: '', component: AdminComponent, pathMatch: 'full' },
       {
         path: 'tracks',
         loadChildren: () =>

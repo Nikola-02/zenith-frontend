@@ -1,0 +1,13 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+button {
+  margin-top: 140px;
+  margin-right: 20px;
+}
+
+.admin-links {
+  background-color: #6f4fc2;
+  color: #e3e3e3;
+}/*# sourceMappingURL=admin-nav.component.css.map */
