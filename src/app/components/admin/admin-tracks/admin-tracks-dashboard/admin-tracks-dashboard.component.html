@@ -44,7 +44,7 @@
             <button
               class="btn update-create-btn"
               type="button"
-              routerLink="/tracks/{{ track.id }}"
+              routerLink="/tracks/{{ track.id }}/edit"
             >
               Edit
             </button>
@@ -53,7 +53,7 @@
             <button
               class="btn btn-danger"
               type="button"
-              routerLink="/tracks/{{ track.id }}"
+              (click)="deleteTrack(track.id)"
             >
               Delete
             </button>
