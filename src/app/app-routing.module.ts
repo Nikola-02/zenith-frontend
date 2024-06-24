@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { unauthorizedGuard } from './shared/guards/unauthorized.guard';
+import { AdminLayoutComponent } from './components/layout/admin-layout/admin-layout.component';
 
 const routes: Routes = [
   {
@@ -36,16 +37,13 @@ const routes: Routes = [
             (m) => m.PlaylistsModule
           ),
       },
-      // { path: 'contact-us', component: ContactUsComponent },
-      // { path: 'author', component: AuthorComponent },
-
-      // {
-      //   path: 'admin',
-      //   component: AdminLayoutComponent,
-      //   canActivateChild: [adminGuard],
-      //   loadChildren: () =>
-      //     import('./components/admin/admin.module').then((m) => m.AdminModule),
-      // },
+      {
+        path: 'admin',
+        component: AdminLayoutComponent,
+        //canActivateChild: [adminGuard],
+        loadChildren: () =>
+          import('./components/admin/admin.module').then((m) => m.AdminModule),
+      },
     ],
   },
 ];

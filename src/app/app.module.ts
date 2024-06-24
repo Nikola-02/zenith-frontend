@@ -15,6 +15,8 @@ import { SharedModule } from './shared/shared.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { AdminLayoutComponent } from './components/layout/admin-layout/admin-layout.component';
+import { AdminNavComponent } from './components/fixed/admin-nav/admin-nav.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
+    AdminLayoutComponent,
+    AdminNavComponent,
   ],
   imports: [
     BrowserModule,
