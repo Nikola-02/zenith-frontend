@@ -28,11 +28,7 @@ export class AdminGenresCreateComponent implements OnDestroy {
   onCreateNewGenre() {
     if (this.form.valid) {
       let formData = {
-        username: this.form.get('username')?.value,
-        firstName: this.form.get('firstName')?.value,
-        lastName: this.form.get('lastName')?.value,
-        email: this.form.get('email')?.value,
-        password: this.form.get('password')?.value,
+        name: this.form.get('name')?.value,
       };
 
       this.createGenreSub = this.adminGenresService
@@ -64,14 +60,14 @@ export class AdminGenresCreateComponent implements OnDestroy {
 
             if (error.status == 500) {
               this.popUpService.show(
-                'Error occured while adding user.',
+                'Error occured while adding genre.',
                 'error-snack-bar'
               );
               return;
             }
 
             this.popUpService.show(
-              'Error occured while adding user.',
+              'Error occured while adding genre.',
               'error-snack-bar'
             );
           },
