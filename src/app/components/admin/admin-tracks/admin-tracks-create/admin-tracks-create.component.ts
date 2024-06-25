@@ -175,14 +175,14 @@ export class AdminTracksCreateComponent implements OnInit, OnDestroy {
 
             if (error.status == 500) {
               this.popUpService.show(
-                'Error occured while fetching data.',
+                'Error occured while adding track.',
                 'error-snack-bar'
               );
               return;
             }
 
             this.popUpService.show(
-              'Error occured while fetching data.',
+              'Error occured while adding track.',
               'error-snack-bar'
             );
           },

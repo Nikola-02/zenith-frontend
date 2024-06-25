@@ -24,6 +24,10 @@ export class AdminTracksService {
     return this.http.post(`${this.apiUrl}tracks`, formData);
   }
 
+  editTrack(trackId, formData) {
+    return this.http.put(`${this.apiUrl}tracks/` + trackId, formData);
+  }
+
   deleteTrack(trackId) {
     return this.http.delete(`${this.apiUrl}tracks/` + trackId);
   }
