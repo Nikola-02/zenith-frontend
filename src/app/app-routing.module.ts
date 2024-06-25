@@ -6,6 +6,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { unauthorizedGuard } from './shared/guards/unauthorized.guard';
 import { AdminLayoutComponent } from './components/layout/admin-layout/admin-layout.component';
+import { userGuard } from './shared/guards/user.guard';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
       },
       {
         path: 'playlists',
+        canActivateChild: [userGuard],
         loadChildren: () =>
           import('./components/playlists/playlists.module').then(
             (m) => m.PlaylistsModule

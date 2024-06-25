@@ -63,6 +63,21 @@ export class AuthService implements OnInit {
     return !this.getTokenFromLS();
   }
 
+  isAuthorized() {
+    let token = localStorage.getItem('user_token');
+    if (token) {
+      let user = this.jwtHelper.decodeToken(token);
+
+      if (logoutIfTokenExpired(user)) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
   getTokenFromLS() {
     return localStorage.getItem('user_token');
   }
