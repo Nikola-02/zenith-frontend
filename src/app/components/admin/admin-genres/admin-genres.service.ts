@@ -24,7 +24,7 @@ export class AdminGenresService {
     return this.http.post(`${this.apiUrl}genres`, formData);
   }
 
-  editUser(genreId, formData) {
+  editGenre(genreId, formData) {
     return this.http.put(`${this.apiUrl}genres/` + genreId, formData);
   }
 
