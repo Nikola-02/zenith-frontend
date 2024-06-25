@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TracksService } from '../tracks.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ITrack } from '../../../shared/interfaces/i-track';
 import { PopUpService } from '../../../shared/services/pop-up.service';
 import { AuthService } from '../../auth/auth.service';
@@ -37,7 +37,8 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private popUpService: PopUpService,
     private authService: AuthService,
-    private playlistService: PlaylistsService
+    private playlistService: PlaylistsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -74,6 +75,11 @@ export class SingleTrackComponent implements OnInit, OnDestroy {
 
         if (error.status == 401) {
           this.authService.logout();
+          return;
+        }
+
+        if (error.status == 404) {
+          this.router.navigate(['/']);
           return;
         }
 
