@@ -22,6 +22,13 @@ const routes: Routes = [
             (m) => m.AdminUsersModule
           ),
       },
+      {
+        path: 'genres',
+        loadChildren: () =>
+          import('./admin-genres/admin-genres.module').then(
+            (m) => m.AdminGenresModule
+          ),
+      },
     ],
   },
 ];

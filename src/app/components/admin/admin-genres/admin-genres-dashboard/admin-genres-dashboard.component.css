@@ -1,0 +1,41 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+
+.update-delete-playlist-btns {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.update-delete-playlist-btns button {
+  font-size: 18px;
+  padding: 8px 22px;
+}
+
+.dashboard-title {
+  margin: 40px 0px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.dashboard-title h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.update-create-btn {
+  border: none;
+  background-color: #6f4fc2;
+  color: #fff;
+  font-size: 18px;
+  padding: 8px 22px;
+  transition: 0.3s all;
+}
+.update-create-btn:hover {
+  background-color: #342659;
+}/*# sourceMappingURL=admin-genres-dashboard.component.css.map */
