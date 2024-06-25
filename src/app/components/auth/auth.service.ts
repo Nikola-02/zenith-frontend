@@ -16,6 +16,7 @@ export class AuthService implements OnInit {
   private apiUrl = environment.apiUrl;
   public $userSubject = new BehaviorSubject<IUser | null>(null);
   public $tokenExpired = new BehaviorSubject<string>('');
+  private adminUseCaseId: number = 39;
 
   constructor(
     private http: HttpClient,
@@ -72,6 +73,27 @@ export class AuthService implements OnInit {
         return false;
       } else {
         return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  isAdmin() {
+    let token = localStorage.getItem('user_token');
+    if (token) {
+      let user = this.jwtHelper.decodeToken(token);
+
+      let userObj = user as IUser;
+
+      let useCases: number[] = JSON.parse(userObj.UseCaseIds);
+
+      if (logoutIfTokenExpired(userObj)) {
+        return false;
+      } else if (useCases.includes(this.adminUseCaseId)) {
+        return true;
+      } else {
+        return false;
       }
     } else {
       return false;

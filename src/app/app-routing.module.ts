@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { unauthorizedGuard } from './shared/guards/unauthorized.guard';
 import { AdminLayoutComponent } from './components/layout/admin-layout/admin-layout.component';
 import { userGuard } from './shared/guards/user.guard';
+import { adminGuard } from './shared/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -42,7 +43,7 @@ const routes: Routes = [
       {
         path: 'admin',
         component: AdminLayoutComponent,
-        //canActivateChild: [adminGuard],
+        canActivateChild: [adminGuard],
         loadChildren: () =>
           import('./components/admin/admin.module').then((m) => m.AdminModule),
       },
