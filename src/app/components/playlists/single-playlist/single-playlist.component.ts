@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import {
   ActivatedRoute,
   ActivatedRouteSnapshot,
@@ -17,9 +17,10 @@ import { DeleteCheckDialogComponent } from '../../../shared/abstract/delete-chec
   templateUrl: './single-playlist.component.html',
   styleUrl: './single-playlist.component.scss',
 })
-export class SinglePlaylistComponent implements OnInit {
+export class SinglePlaylistComponent implements OnInit, OnDestroy {
   public playlist: IPlaylist;
   private deletePlaylistSub: Subscription;
+  private deleteDialogSub: Subscription;
   readonly dialog = inject(MatDialog);
 
   constructor(
@@ -38,7 +39,7 @@ export class SinglePlaylistComponent implements OnInit {
 
   deletePlaylist(id) {
     const dialogRef = this.dialog.open(DeleteCheckDialogComponent);
-    dialogRef.afterClosed().subscribe((result) => {
+    this.deleteDialogSub = dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deletePlaylistSub = this.playlistService
           .deletePlaylist(id)
@@ -121,5 +122,15 @@ export class SinglePlaylistComponent implements OnInit {
         );
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.deleteDialogSub) {
+      this.deleteDialogSub.unsubscribe();
+    }
+
+    if (this.deletePlaylistSub) {
+      this.deletePlaylistSub.unsubscribe();
+    }
   }
 }

@@ -1,9 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ITrack } from '../../../../shared/interfaces/i-track';
 import { Subscription } from 'rxjs';
 import { PopUpService } from '../../../../shared/services/pop-up.service';
 import { AdminTracksService } from '../admin-tracks.service';
 import { Router } from '@angular/router';
+import { DeleteCheckDialogComponent } from '../../../../shared/abstract/delete-check-dialog/delete-check-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-admin-tracks-dashboard',
@@ -14,6 +16,8 @@ export class AdminTracksDashboardComponent implements OnInit, OnDestroy {
   public tracks: ITrack[];
   private tracksSub: Subscription;
   private deleteTrackSub: Subscription;
+  private deleteDialogSub: Subscription;
+  readonly dialog = inject(MatDialog);
 
   constructor(
     private adminTracksService: AdminTracksService,
@@ -52,34 +56,39 @@ export class AdminTracksDashboardComponent implements OnInit, OnDestroy {
   }
 
   deleteTrack(trackId) {
-    this.deleteTrackSub = this.adminTracksService
-      .deleteTrack(trackId)
-      .subscribe({
-        next: (response) => {
-          this.popUpService.show(
-            'Successfully deleted track.',
-            'success-snack-bar'
-          );
+    const dialogRef = this.dialog.open(DeleteCheckDialogComponent);
+    this.deleteDialogSub = dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteTrackSub = this.adminTracksService
+          .deleteTrack(trackId)
+          .subscribe({
+            next: (response) => {
+              this.popUpService.show(
+                'Successfully deleted track.',
+                'success-snack-bar'
+              );
 
-          this.fetchAdminTracks();
-        },
-        error: (error) => {
-          console.log(error);
+              this.fetchAdminTracks();
+            },
+            error: (error) => {
+              console.log(error);
 
-          if (error.status == 500) {
-            this.popUpService.show(
-              'Error occured while deleting track.',
-              'error-snack-bar'
-            );
-            return;
-          }
+              if (error.status == 500) {
+                this.popUpService.show(
+                  'Error occured while deleting track.',
+                  'error-snack-bar'
+                );
+                return;
+              }
 
-          this.popUpService.show(
-            'Error occured while deleting track.',
-            'error-snack-bar'
-          );
-        },
-      });
+              this.popUpService.show(
+                'Error occured while deleting track.',
+                'error-snack-bar'
+              );
+            },
+          });
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -89,6 +98,10 @@ export class AdminTracksDashboardComponent implements OnInit, OnDestroy {
 
     if (this.deleteTrackSub) {
       this.deleteTrackSub.unsubscribe();
+    }
+
+    if (this.deleteDialogSub) {
+      this.deleteDialogSub.unsubscribe();
     }
   }
 }
