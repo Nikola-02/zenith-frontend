@@ -46,7 +46,7 @@
               type="button"
               routerLink="/admin/tracks/{{ track.id }}/edit"
             >
-              Edit
+              <i class="fa-solid fa-pen-to-square"></i>
             </button>
           </td>
           <td>
@@ -55,7 +55,7 @@
               type="button"
               (click)="deleteTrack(track.id)"
             >
-              Delete
+              <i class="fa-solid fa-trash"></i>
             </button>
           </td>
         </tr>

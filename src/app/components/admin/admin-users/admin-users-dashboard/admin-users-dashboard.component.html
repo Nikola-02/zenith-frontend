@@ -1,1 +1,57 @@
-<p>admin-users-dashboard works!</p>
+<div class="container">
+  <div class="dashboard-title">
+    <h2>Users</h2>
+    <button class="btn btn-success" routerLink="/admin/users/create">
+      Create
+    </button>
+  </div>
+
+  <div class="users-admin-panel" *ngIf="users; else noUsers">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Username</th>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">Email</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <th scope="col">{{ i + 1 }}</th>
+          <td scope="col">{{ user.username }}</td>
+          <td scope="col">{{ user.firstName }}</td>
+          <td scope="col">{{ user.lastName }}</td>
+          <td scope="col">{{ user.email }}</td>
+          <td>
+            <button
+              class="btn update-create-btn"
+              type="button"
+              routerLink="/admin/users/{{ user.id }}/edit"
+            >
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger"
+              type="button"
+              (click)="deleteUser(user.id)"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noUsers>
+    <div class="alert alert-danger p-4 my-5 no-playlists">
+      <p>There is no users.</p>
+    </div>
+  </ng-template>
+</div>

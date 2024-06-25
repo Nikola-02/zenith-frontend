@@ -15,6 +15,13 @@ const routes: Routes = [
             (m) => m.AdminTracksModule
           ),
       },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./admin-users/admin-users.module').then(
+            (m) => m.AdminUsersModule
+          ),
+      },
     ],
   },
 ];
