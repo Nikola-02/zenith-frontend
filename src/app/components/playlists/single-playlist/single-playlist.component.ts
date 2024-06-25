@@ -21,6 +21,7 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   public playlist: IPlaylist;
   private deletePlaylistSub: Subscription;
   private deleteDialogSub: Subscription;
+  private removeTrackFromPlaylistSub: Subscription;
   readonly dialog = inject(MatDialog);
 
   constructor(
@@ -124,6 +125,57 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeTrackFromPlaylist(trackId) {
+    const dialogRef = this.dialog.open(DeleteCheckDialogComponent);
+    this.deleteDialogSub = dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.removeTrackFromPlaylistSub = this.playlistService
+          .removeTrackFromPlaylist(trackId, this.playlist.id)
+          .subscribe({
+            next: (response) => {
+              console.log(response);
+              this.popUpService.show(
+                'Successfully remove track from playlist.',
+                'success-snack-bar'
+              );
+
+              this.fetchSinglePlaylist(this.playlist.id);
+            },
+            error: (error) => {
+              console.log(error);
+
+              if (error.status == 422) {
+                let snackBarError = ``;
+
+                if (error.error.length > 1) {
+                  error.error.forEach((element) => {
+                    snackBarError += '\n' + element;
+                  });
+                } else {
+                  snackBarError += error.error[0].error;
+                }
+                this.popUpService.show(snackBarError, 'error-snack-bar');
+                return;
+              }
+
+              if (error.status == 500) {
+                this.popUpService.show(
+                  'Error occurred while removing track from playlist.',
+                  'error-snack-bar'
+                );
+                return;
+              }
+
+              this.popUpService.show(
+                'Error occurred while deleting playlist.',
+                'error-snack-bar'
+              );
+            },
+          });
+      }
+    });
+  }
+
   ngOnDestroy(): void {
     if (this.deleteDialogSub) {
       this.deleteDialogSub.unsubscribe();
@@ -131,6 +183,10 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
 
     if (this.deletePlaylistSub) {
       this.deletePlaylistSub.unsubscribe();
+    }
+
+    if (this.removeTrackFromPlaylistSub) {
+      this.removeTrackFromPlaylistSub.unsubscribe();
     }
   }
 }

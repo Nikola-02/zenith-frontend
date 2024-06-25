@@ -36,4 +36,13 @@ export class PlaylistsService {
   editPlaylist(name, id) {
     return this.http.put(`${environment.apiUrl}playlists/` + id, { name });
   }
+
+  removeTrackFromPlaylist(trackId, playlistId) {
+    return this.http.delete(
+      `${environment.apiUrl}playlists/` + playlistId + '/track',
+      {
+        body: { trackId: trackId },
+      }
+    );
+  }
 }

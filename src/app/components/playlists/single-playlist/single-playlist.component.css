@@ -53,4 +53,9 @@
 .update-delete-playlist-btns button {
   font-size: 18px;
   padding: 8px 22px;
+}
+
+.btn-danger {
+  font-size: 18px;
+  padding: 8px 22px;
 }/*# sourceMappingURL=single-playlist.component.css.map */

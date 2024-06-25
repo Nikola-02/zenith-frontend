@@ -34,6 +34,7 @@
             <th scope="col">Genre</th>
             <th scope="col">MediaType</th>
             <th scope="col">Go to track</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -59,6 +60,15 @@
                 routerLink="/tracks/{{ track.id }}"
               >
                 Details
+              </button>
+            </td>
+            <td>
+              <button
+                class="btn btn-danger"
+                type="button"
+                (click)="removeTrackFromPlaylist(track.id)"
+              >
+                <i class="fa-solid fa-trash"></i>
               </button>
             </td>
           </tr>
