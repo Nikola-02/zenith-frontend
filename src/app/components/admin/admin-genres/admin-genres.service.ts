@@ -20,6 +20,14 @@ export class AdminGenresService {
     });
   }
 
+  createNewGenre(formData) {
+    return this.http.post(`${this.apiUrl}genres`, formData);
+  }
+
+  editUser(genreId, formData) {
+    return this.http.put(`${this.apiUrl}genres/` + genreId, formData);
+  }
+
   deleteGenre(genreId) {
     return this.http.delete(`${this.apiUrl}genres/` + genreId);
   }

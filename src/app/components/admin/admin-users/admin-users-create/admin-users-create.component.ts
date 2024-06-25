@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   templateUrl: './admin-users-create.component.html',
   styleUrl: './admin-users-create.component.scss',
 })
-export class AdminUsersCreateComponent {
+export class AdminUsersCreateComponent implements OnDestroy {
   form = new FormGroup({
     username: new FormControl('', [
       Validators.required,
