@@ -1,1 +1,111 @@
-<p>admin-users-edit works!</p>
+<div class="container p-5 playlist-create-container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <h1 class="text-center">Edit user</h1>
+    </div>
+    <div class="col-md-6">
+      <form [formGroup]="form">
+        <div class="mb-3">
+          <label for="exampleInputName1" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputName1"
+            name="username"
+            formControlName="username"
+            required
+          />
+          <div
+            *ngIf="
+              form.get('username')?.hasError('required') ||
+              form.get('username')?.hasError('minLength')
+            "
+            class="alert alert-danger mt-2"
+          >
+            Username is required and min length is 3.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            formControlName="firstName"
+            required
+          />
+          <div
+            *ngIf="form.get('firstName')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            First name is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            formControlName="lastName"
+            required
+          />
+          <div
+            *ngIf="form.get('lastName')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Last name is required.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            formControlName="email"
+            required
+          />
+          <div
+            *ngIf="
+              form.get('email')?.hasError('required') ||
+              form.get('email')?.hasError('email')
+            "
+            class="alert alert-danger mt-2"
+          >
+            Email is required. Format for email: example&commat;gmail.com
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            formControlName="password"
+          />
+          <div class="alert alert-primary mt-2">
+            We will use your old password, if you dont provide a new one.
+          </div>
+        </div>
+        <button
+          [disabled]="!form.valid"
+          type="button"
+          class="btn btn-primary"
+          (click)="onEditUser(user.id)"
+        >
+          Edit
+        </button>
+      </form>
+      <div *ngIf="validationErrors" class="alert alert-danger mt-3">
+        <p *ngFor="let error of validationErrors" class="mb-0 mt-1">
+          {{ error.error }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

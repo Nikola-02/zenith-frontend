@@ -26,6 +26,10 @@ export class AdminUsersService {
     });
   }
 
+  editUser(userId, formData) {
+    return this.http.put(`${this.apiUrl}users/` + userId, formData);
+  }
+
   deleteUser(userId) {
     return this.http.delete(`${this.apiUrl}users/` + userId);
   }
