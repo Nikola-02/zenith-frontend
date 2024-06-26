@@ -18,7 +18,7 @@ import { LoginComponent } from '../../../auth/login/login.component';
 export class AdminTracksCreateComponent implements OnInit, OnDestroy {
   public form = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl(''),
     duration: new FormControl('', [Validators.required, Validators.min(15)]),
     price: new FormControl('', [Validators.required, Validators.min(0.1)]),
     albumId: new FormControl('', [Validators.required]),
