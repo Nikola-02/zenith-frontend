@@ -7,7 +7,9 @@ $white: #e3e3e3;
 }
 
 .card {
-  width: 80%;
+  width: 90%;
+  display: flex;
+  justify-content: center;
   .title-card {
     display: flex;
     justify-content: space-between;

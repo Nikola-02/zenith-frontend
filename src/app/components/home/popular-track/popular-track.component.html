@@ -12,8 +12,9 @@
 
     <p class="card-text">{{ track.description }}</p>
 
-    <p class="card-text">{{ track.genre.name }}</p>
-    <p class="card-text">{{ track.artist.name }}</p>
+    <p class="card-text small">Genre: {{ track.genre.name }}</p>
+    <p class="card-text lead">Artist: {{ track.artist.name }}</p>
+    <p class="card-text">Album: {{ track.album.name }}</p>
     <p class="card-text heart-div">
       <i class="fa-solid fa-heart"></i> <span>{{ track.likesCount }}</span>
     </p>
