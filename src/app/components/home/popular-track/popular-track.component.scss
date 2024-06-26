@@ -1,0 +1,43 @@
+$lightPurple: #6f4fc2;
+$darkPurple: #342659;
+$white: #e3e3e3;
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.card {
+  width: 80%;
+  .title-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    h4 {
+      margin: 0;
+      padding: 0;
+      font-weight: 500;
+    }
+    .price {
+      font-size: 1.2rem;
+    }
+  }
+
+  .heart-div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .fa-heart {
+      font-size: 1.4rem;
+      color: $lightPurple;
+    }
+    span {
+      font-size: 20px;
+    }
+  }
+
+  .btn-go-to {
+    background-color: $lightPurple;
+    color: $white;
+  }
+}

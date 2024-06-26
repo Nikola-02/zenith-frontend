@@ -1,17 +1,23 @@
-<div class="card" style="width: 18rem">
+<div class="card">
   <img
     [src]="'http://localhost:5001/tracks/images/' + track.image"
     class="card-img-top"
     alt="{{ track.name }}"
   />
   <div class="card-body">
-    <h5 class="card-title">{{ track.name }}</h5>
+    <div class="title-card">
+      <h4 class="card-title">{{ track.name }}</h4>
+      <p class="card-text price">$ {{ track.price }}</p>
+    </div>
+
     <p class="card-text">{{ track.description }}</p>
-    <p class="card-text">$ {{ track.price }}</p>
+
     <p class="card-text">{{ track.genre.name }}</p>
     <p class="card-text">{{ track.artist.name }}</p>
-    <p class="card-text">Likes: {{ track.likesCount }}</p>
-    <a href="#" class="btn btn-primary" routerLink="/tracks/{{ track.id }}"
+    <p class="card-text heart-div">
+      <i class="fa-solid fa-heart"></i> <span>{{ track.likesCount }}</span>
+    </p>
+    <a href="#" class="btn btn-go-to" routerLink="/tracks/{{ track.id }}"
       >Go to track</a
     >
   </div>
