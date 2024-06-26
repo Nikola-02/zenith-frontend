@@ -6,6 +6,7 @@
   width: 90%;
   display: flex;
   justify-content: center;
+  border-color: #6f4fc2;
 }
 .card .title-card {
   display: flex;
@@ -16,7 +17,9 @@
 .card .title-card h4 {
   margin: 0;
   padding: 0;
-  font-weight: 500;
+  font-size: 27px;
+  font-weight: 600;
+  color: #6f4fc2;
 }
 .card .title-card .price {
   font-size: 1.2rem;

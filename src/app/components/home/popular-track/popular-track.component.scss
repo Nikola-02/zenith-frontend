@@ -10,6 +10,7 @@ $white: #e3e3e3;
   width: 90%;
   display: flex;
   justify-content: center;
+  border-color: $lightPurple;
   .title-card {
     display: flex;
     justify-content: space-between;
@@ -18,7 +19,9 @@ $white: #e3e3e3;
     h4 {
       margin: 0;
       padding: 0;
-      font-weight: 500;
+      font-size: 27px;
+      font-weight: 600;
+      color: $lightPurple;
     }
     .price {
       font-size: 1.2rem;
