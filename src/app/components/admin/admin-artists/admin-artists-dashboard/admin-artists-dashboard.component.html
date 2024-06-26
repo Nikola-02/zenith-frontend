@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="dashboard-title">
+    <h2>Artists</h2>
+    <button class="btn btn-success" routerLink="/admin/artists/create">
+      Create
+    </button>
+  </div>
+
+  <div class="artists-admin-panel" *ngIf="artists; else noArtists">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let artist of artists; let i = index">
+          <th scope="col">{{ i + 1 }}</th>
+          <td scope="col">{{ artist.name }}</td>
+          <td>
+            <button
+              class="btn update-create-btn"
+              type="button"
+              routerLink="/admin/artists/{{ artist.id }}/edit"
+            >
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger"
+              type="button"
+              (click)="deleteArtist(artist.id)"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noArtists>
+    <div class="alert alert-danger p-4 my-5 no-artists">
+      <p>There is no artists.</p>
+    </div>
+  </ng-template>
+</div>

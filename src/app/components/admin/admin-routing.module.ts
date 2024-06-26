@@ -29,6 +29,13 @@ const routes: Routes = [
             (m) => m.AdminGenresModule
           ),
       },
+      {
+        path: 'artists',
+        loadChildren: () =>
+          import('./admin-artists/admin-artists.module').then(
+            (m) => m.AdminArtistsModule
+          ),
+      },
     ],
   },
 ];

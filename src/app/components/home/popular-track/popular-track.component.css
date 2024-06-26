@@ -1,0 +1,39 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.card {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
+.card .title-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.card .title-card h4 {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+}
+.card .title-card .price {
+  font-size: 1.2rem;
+}
+.card .heart-div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.card .heart-div .fa-heart {
+  font-size: 1.4rem;
+  color: #6f4fc2;
+}
+.card .heart-div span {
+  font-size: 20px;
+}
+.card .btn-go-to {
+  background-color: #6f4fc2;
+  color: #e3e3e3;
+}/*# sourceMappingURL=popular-track.component.css.map */
