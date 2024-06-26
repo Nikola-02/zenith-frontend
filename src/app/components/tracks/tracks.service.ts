@@ -27,6 +27,10 @@ export class TracksService {
     return this.http.get(`${this.apiUrl}tracks/` + id, noAuthOptions);
   }
 
+  fetchPopularTracks() {
+    return this.http.get(`${this.apiUrl}tracks/popular`, noAuthOptions);
+  }
+
   fetchFilters() {
     return this.http.get(`${this.apiUrl}filters`, noAuthOptions);
   }

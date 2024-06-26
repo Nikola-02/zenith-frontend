@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { AdminLayoutComponent } from './components/layout/admin-layout/admin-layout.component';
 import { AdminNavComponent } from './components/fixed/admin-nav/admin-nav.component';
+import { PopularTrackComponent } from './components/home/popular-track/popular-track.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AdminNavComponent } from './components/fixed/admin-nav/admin-nav.compon
     LoginComponent,
     AdminLayoutComponent,
     AdminNavComponent,
+    PopularTrackComponent,
   ],
   imports: [
     BrowserModule,
