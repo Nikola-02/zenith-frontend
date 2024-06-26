@@ -72,6 +72,11 @@ export class AdminGenresDashboardComponent implements OnInit, OnDestroy {
             error: (error) => {
               console.log(error);
 
+              if (error.status == 409) {
+                this.popUpService.show(error.error.error, 'error-snack-bar');
+                return;
+              }
+
               if (error.status == 500) {
                 this.popUpService.show(
                   'Error occured while deleting genre.',
