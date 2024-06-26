@@ -96,3 +96,42 @@
     justify-content: space-between;
   }
 }
+
+.find-your-beat-section {
+  width: 100%;
+  background-image: url("/assets/images/mic.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px 0px;
+  .wrapper {
+    padding: 60px 0px;
+    @include vars.wrapper();
+    .title {
+      width: 45%;
+      h3 {
+        font-size: 40px;
+        font-weight: 600;
+      }
+
+      p {
+        margin-top: 8px;
+        font-size: 20px;
+        color: rgba($color: #000000, $alpha: 0.7);
+      }
+
+      .btn {
+        margin-top: 10px;
+        background-color: vars.$lightPurple;
+        color: vars.$white;
+        padding: 8px 14px;
+        font-size: 20px;
+        transition: 0.3s all;
+
+        &:hover {
+          background-color: vars.$darkPurple;
+        }
+      }
+    }
+  }
+}

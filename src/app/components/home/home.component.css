@@ -105,4 +105,41 @@
 .popular-tracks-section .popular-tracks {
   display: flex;
   justify-content: space-between;
+}
+
+.find-your-beat-section {
+  width: 100%;
+  background-image: url("/assets/images/mic.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px 0px;
+}
+.find-your-beat-section .wrapper {
+  padding: 60px 0px;
+  width: 80%;
+  margin: 0px auto;
+}
+.find-your-beat-section .wrapper .title {
+  width: 45%;
+}
+.find-your-beat-section .wrapper .title h3 {
+  font-size: 40px;
+  font-weight: 600;
+}
+.find-your-beat-section .wrapper .title p {
+  margin-top: 8px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.find-your-beat-section .wrapper .title .btn {
+  margin-top: 10px;
+  background-color: #6f4fc2;
+  color: #f7f7f7;
+  padding: 8px 14px;
+  font-size: 20px;
+  transition: 0.3s all;
+}
+.find-your-beat-section .wrapper .title .btn:hover {
+  background-color: #342659;
 }/*# sourceMappingURL=home.component.css.map */
