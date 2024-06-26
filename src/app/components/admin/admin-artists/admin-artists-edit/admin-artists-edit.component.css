@@ -1,1 +1,7 @@
-/*# sourceMappingURL=admin-artists-edit.component.css.map */
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  margin-top: 30px;
+}/*# sourceMappingURL=admin-artists-edit.component.css.map */

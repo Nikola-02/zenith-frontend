@@ -1,1 +1,41 @@
-<p>admin-artists-create works!</p>
+<div class="container p-5 playlist-create-container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <h1 class="text-center">Create artist</h1>
+    </div>
+    <div class="col-md-6">
+      <form [formGroup]="form">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            formControlName="name"
+            required
+          />
+          <div
+            *ngIf="form.get('name')?.hasError('required')"
+            class="alert alert-danger mt-2"
+          >
+            Name is required.
+          </div>
+        </div>
+        <button
+          [disabled]="!form.valid"
+          type="button"
+          class="btn btn-primary"
+          (click)="onCreateNewArtist()"
+        >
+          Create
+        </button>
+      </form>
+      <div *ngIf="validationErrors" class="alert alert-danger mt-3">
+        <p *ngFor="let error of validationErrors" class="mb-0 mt-1">
+          {{ error.error }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

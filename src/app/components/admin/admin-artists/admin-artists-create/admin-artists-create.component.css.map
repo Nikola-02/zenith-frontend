@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"admin-artists-create.component.css"}
+{"version":3,"sources":["admin-artists-create.component.scss","admin-artists-create.component.css"],"names":[],"mappings":"AAIA;EACE,kCAAA;ACHF;;ADMA;EACE,gBAAA;ACHF","file":"admin-artists-create.component.css"}
